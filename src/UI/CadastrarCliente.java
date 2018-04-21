@@ -1,9 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI;
+
+import Controller.ClienteController;
+import Model.Cliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,13 +12,16 @@ package UI;
  */
 public class CadastrarCliente extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CadastrarCliente
-     */
+    private ClienteController clienteControle;
+    
     public CadastrarCliente() {
         initComponents();
     }
 
+     public ClienteController ClienteController(ClienteController clienteControle){
+        return this.clienteControle = clienteControle;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +31,323 @@ public class CadastrarCliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        labelTittle = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
+        campoNome = new javax.swing.JTextField();
+        labelRua = new javax.swing.JLabel();
+        campoRua = new javax.swing.JTextField();
+        labelNumero = new javax.swing.JLabel();
+        campoNumero = new javax.swing.JTextField();
+        labelComplemento = new javax.swing.JLabel();
+        campoComplemento = new javax.swing.JTextField();
+        labelCidade = new javax.swing.JLabel();
+        campoCidade = new javax.swing.JTextField();
+        labelCEP = new javax.swing.JLabel();
+        campoCEP = new javax.swing.JTextField();
+        labelEstado = new javax.swing.JLabel();
+        campoEstado = new javax.swing.JTextField();
+        labelPais = new javax.swing.JLabel();
+        campoPais = new javax.swing.JTextField();
+        labelCPF = new javax.swing.JLabel();
+        campoCPF = new javax.swing.JTextField();
+        labelIdade = new javax.swing.JLabel();
+        campoIdade = new javax.swing.JTextField();
+        bCadastrar = new javax.swing.JButton();
+        bAlterar = new javax.swing.JButton();
+        bDeletar = new javax.swing.JButton();
+        bHome = new javax.swing.JButton();
+        bProximo = new javax.swing.JButton();
+        bAnterior = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+
+        labelTittle.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTittle.setText("Dados Cliente");
+
+        labelNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelNome.setText("Nome");
+
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeActionPerformed(evt);
+            }
+        });
+
+        labelRua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelRua.setText("Rua");
+
+        labelNumero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelNumero.setText("Número");
+
+        labelComplemento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelComplemento.setText("Complemento");
+
+        labelCidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCidade.setText("Cidade");
+
+        labelCEP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCEP.setText("CEP");
+
+        labelEstado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelEstado.setText("Estado");
+
+        labelPais.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelPais.setText("País");
+
+        labelCPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCPF.setText("CPF");
+
+        labelIdade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelIdade.setText("Idade");
+
+        bCadastrar.setText("Cadastrar");
+        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCadastrarActionPerformed(evt);
+            }
+        });
+
+        bAlterar.setText("Alterar");
+
+        bDeletar.setText("Deletar");
+
+        bHome.setText("Home");
+        bHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHomeActionPerformed(evt);
+            }
+        });
+
+        bProximo.setText("Próximo");
+
+        bAnterior.setText("Anterior");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(labelTittle)
+                .addContainerGap(151, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelComplemento)
+                            .addComponent(labelCidade)
+                            .addComponent(labelCEP)
+                            .addComponent(labelEstado)
+                            .addComponent(labelPais)
+                            .addComponent(labelCPF))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoCPF)
+                            .addComponent(campoPais)
+                            .addComponent(campoEstado)
+                            .addComponent(campoCidade)
+                            .addComponent(campoComplemento)
+                            .addComponent(campoCEP))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelRua)
+                            .addComponent(labelNome)
+                            .addComponent(labelNumero))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(campoRua)
+                            .addComponent(campoNome))
+                        .addGap(117, 117, 117))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelIdade)
+                .addGap(64, 64, 64)
+                .addComponent(campoIdade)
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(labelTittle)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNome)
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelRua)
+                    .addComponent(campoRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNumero)
+                    .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCadastrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelComplemento)
+                    .addComponent(campoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bAlterar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCidade)
+                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bDeletar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCEP)
+                    .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bHome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEstado)
+                    .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bProximo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPais)
+                    .addComponent(campoPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bAnterior))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCPF)
+                    .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelIdade)
+                    .addComponent(campoIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeActionPerformed
+
+    private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        // TODO add your handling code here:
+        Cliente c = new Cliente();
+        
+        //setar todos os atributos do cliente
+        try {
+            c.setNome(campoNome.getText());
+            c.setCpf(campoCPF.getText());
+            c.setIdade(Integer.parseInt(campoIdade.getText()));
+            c.setRua(campoRua.getText());
+            c.setNumero(Integer.parseInt(campoNumero.getText()));
+            c.setComplemento(campoComplemento.getText());
+            c.setCidade(campoCidade.getText());
+            c.setCep(campoCEP.getText());
+            c.setEstado(campoEstado.getText());
+            c.setPais(campoPais.getText());
+
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //cadastrar o cliente no controlador de cliente
+        try {
+            clienteControle.create(c);
+
+        } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+        // limpar  todos os campos
+        try {
+            campoCEP.setText("");
+            campoCPF.setText("");
+            campoCidade.setText("");
+            campoComplemento.setText("");
+            campoEstado.setText("");
+            campoIdade.setText("");
+            campoNome.setText("");
+            campoNumero.setText("");
+            campoPais.setText("");
+            campoRua.setText("");
+        } catch (Exception ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bCadastrarActionPerformed
+
+    private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Principal().setVisible(true);
+            
+    }//GEN-LAST:event_bHomeActionPerformed
+
+       public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CadastrarCliente().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAlterar;
+    private javax.swing.JButton bAnterior;
+    private javax.swing.JButton bCadastrar;
+    private javax.swing.JButton bDeletar;
+    private javax.swing.JButton bHome;
+    private javax.swing.JButton bProximo;
+    private javax.swing.JTextField campoCEP;
+    private javax.swing.JTextField campoCPF;
+    private javax.swing.JTextField campoCidade;
+    private javax.swing.JTextField campoComplemento;
+    private javax.swing.JTextField campoEstado;
+    private javax.swing.JTextField campoIdade;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoNumero;
+    private javax.swing.JTextField campoPais;
+    private javax.swing.JTextField campoRua;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel labelCEP;
+    private javax.swing.JLabel labelCPF;
+    private javax.swing.JLabel labelCidade;
+    private javax.swing.JLabel labelComplemento;
+    private javax.swing.JLabel labelEstado;
+    private javax.swing.JLabel labelIdade;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelNumero;
+    private javax.swing.JLabel labelPais;
+    private javax.swing.JLabel labelRua;
+    private javax.swing.JLabel labelTittle;
     // End of variables declaration//GEN-END:variables
 }

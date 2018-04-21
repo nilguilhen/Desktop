@@ -10,7 +10,7 @@ public class Endereco {
     private String rua;
     private int numero;
     private String complemento;
-    private long cep;
+    private String cep;
 
     
 
@@ -63,11 +63,11 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public long getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(long cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 

@@ -1,14 +1,12 @@
-
 package Model;
 
 public class Concessionaria {
 
-    
     Endereco endereco = new Endereco();
     
     private String nome;
     private String cnpj;
-    private double tarifa;
+    private float tarifa;
 
     public Endereco getEndereco() {
         return endereco;
@@ -34,11 +32,11 @@ public class Concessionaria {
         this.cnpj = cnpj;
     }
 
-    public double getTarifa() {
+    public float getTarifa() {
         return tarifa;
     }
 
-    public void setTarifa(double tarifa) {
+    public void setTarifa(float tarifa) {
         this.tarifa = tarifa;
     }
     
