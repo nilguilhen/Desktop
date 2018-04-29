@@ -31,8 +31,18 @@ public class Principal extends javax.swing.JFrame {
         });
 
         bChamarConcessionaria.setText("Concesionaria");
+        bChamarConcessionaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bChamarConcessionariaActionPerformed(evt);
+            }
+        });
 
         bGerarConta.setText("Gerar Conta");
+        bGerarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGerarContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,7 +68,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(53, 53, 53))
         );
 
-        pack();
+        setBounds(0, 0, 416, 339);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bChamarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChamarClienteActionPerformed
@@ -66,6 +76,18 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
         new CadastrarCliente().setVisible(true);
     }//GEN-LAST:event_bChamarClienteActionPerformed
+
+    private void bGerarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarContaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new GerarConta().setVisible(true);
+    }//GEN-LAST:event_bGerarContaActionPerformed
+
+    private void bChamarConcessionariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChamarConcessionariaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new CadastrarFornecedor().setVisible(true);
+    }//GEN-LAST:event_bChamarConcessionariaActionPerformed
 
     /**
      * @param args the command line arguments

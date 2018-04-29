@@ -6,22 +6,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Aluno
- */
-public class CadastrarCliente extends javax.swing.JPanel {
+public class CadastrarCliente extends javax.swing.JFrame {
 
     private ClienteController clienteControle;
-    
+
     public CadastrarCliente() {
         initComponents();
     }
 
-     public ClienteController ClienteController(ClienteController clienteControle){
-        return this.clienteControle = clienteControle;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,14 +23,14 @@ public class CadastrarCliente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        labelTittle = new javax.swing.JLabel();
-        labelNome = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
-        labelRua = new javax.swing.JLabel();
-        campoRua = new javax.swing.JTextField();
-        labelNumero = new javax.swing.JLabel();
-        campoNumero = new javax.swing.JTextField();
+        labelIdade = new javax.swing.JLabel();
+        campoIdade = new javax.swing.JTextField();
+        bCadastrar = new javax.swing.JButton();
+        bAlterar = new javax.swing.JButton();
+        bDeletar = new javax.swing.JButton();
+        bHome = new javax.swing.JButton();
+        bProximo = new javax.swing.JButton();
+        bAnterior = new javax.swing.JButton();
         labelComplemento = new javax.swing.JLabel();
         campoComplemento = new javax.swing.JTextField();
         labelCidade = new javax.swing.JLabel();
@@ -49,55 +41,18 @@ public class CadastrarCliente extends javax.swing.JPanel {
         campoEstado = new javax.swing.JTextField();
         labelPais = new javax.swing.JLabel();
         campoPais = new javax.swing.JTextField();
+        labelTittle = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
+        campoNome = new javax.swing.JTextField();
+        labelRua = new javax.swing.JLabel();
+        campoRua = new javax.swing.JTextField();
+        labelNumero = new javax.swing.JLabel();
+        campoNumero = new javax.swing.JTextField();
         labelCPF = new javax.swing.JLabel();
         campoCPF = new javax.swing.JTextField();
-        labelIdade = new javax.swing.JLabel();
-        campoIdade = new javax.swing.JTextField();
-        bCadastrar = new javax.swing.JButton();
-        bAlterar = new javax.swing.JButton();
-        bDeletar = new javax.swing.JButton();
-        bHome = new javax.swing.JButton();
-        bProximo = new javax.swing.JButton();
-        bAnterior = new javax.swing.JButton();
+        bLimpar = new javax.swing.JButton();
 
-        jButton1.setText("jButton1");
-
-        labelTittle.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTittle.setText("Dados Cliente");
-
-        labelNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelNome.setText("Nome");
-
-        campoNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNomeActionPerformed(evt);
-            }
-        });
-
-        labelRua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelRua.setText("Rua");
-
-        labelNumero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelNumero.setText("Número");
-
-        labelComplemento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelComplemento.setText("Complemento");
-
-        labelCidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelCidade.setText("Cidade");
-
-        labelCEP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelCEP.setText("CEP");
-
-        labelEstado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelEstado.setText("Estado");
-
-        labelPais.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelPais.setText("País");
-
-        labelCPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelCPF.setText("CPF");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labelIdade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelIdade.setText("Idade");
@@ -121,17 +76,66 @@ public class CadastrarCliente extends javax.swing.JPanel {
         });
 
         bProximo.setText("Próximo");
+        bProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bProximoActionPerformed(evt);
+            }
+        });
 
         bAnterior.setText("Anterior");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        labelComplemento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelComplemento.setText("Complemento");
+
+        labelCidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCidade.setText("Cidade");
+
+        labelCEP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCEP.setText("CEP");
+
+        labelEstado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelEstado.setText("Estado");
+
+        labelPais.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelPais.setText("País");
+
+        labelTittle.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTittle.setText("Dados Cliente");
+
+        labelNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelNome.setText("Nome");
+
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeActionPerformed(evt);
+            }
+        });
+
+        labelRua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelRua.setText("Rua");
+
+        labelNumero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelNumero.setText("Número");
+
+        labelCPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelCPF.setText("CPF");
+
+        bLimpar.setText("Limpar");
+        bLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLimparActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addComponent(labelTittle)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -164,12 +168,13 @@ public class CadastrarCliente extends javax.swing.JPanel {
                             .addComponent(labelRua)
                             .addComponent(labelNome)
                             .addComponent(labelNumero))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                             .addComponent(campoRua)
-                            .addComponent(campoNome))
-                        .addGap(117, 117, 117))))
+                            .addComponent(campoNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(34, 34, 34)
+                        .addComponent(bLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelIdade)
@@ -188,7 +193,8 @@ public class CadastrarCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelRua)
-                    .addComponent(campoRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNumero)
@@ -227,54 +233,60 @@ public class CadastrarCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelIdade)
                     .addComponent(campoIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 71, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoNomeActionPerformed
+    public void limparCampos() {
+        campoCEP.setText("");
+        campoCPF.setText("");
+        campoCidade.setText("");
+        campoComplemento.setText("");
+        campoEstado.setText("");
+        campoIdade.setText("");
+        campoNome.setText("");
+        campoNumero.setText("");
+        campoPais.setText("");
+        campoRua.setText("");
+    }
 
+    public void pegarCampo(Cliente c) {
+        c.setNome(campoNome.getText());
+        c.setCpf(campoCPF.getText());
+        c.setIdade(Integer.parseInt(campoIdade.getText()));
+        c.setRua(campoRua.getText());
+        c.setNumero(Integer.parseInt(campoNumero.getText()));
+        c.setComplemento(campoComplemento.getText());
+        c.setCidade(campoCidade.getText());
+        c.setCep(campoCEP.getText());
+        c.setEstado(campoEstado.getText());
+        c.setPais(campoPais.getText());
+    }
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         // TODO add your handling code here:
         Cliente c = new Cliente();
-        
+
         //setar todos os atributos do cliente
         try {
-            c.setNome(campoNome.getText());
-            c.setCpf(campoCPF.getText());
-            c.setIdade(Integer.parseInt(campoIdade.getText()));
-            c.setRua(campoRua.getText());
-            c.setNumero(Integer.parseInt(campoNumero.getText()));
-            c.setComplemento(campoComplemento.getText());
-            c.setCidade(campoCidade.getText());
-            c.setCep(campoCEP.getText());
-            c.setEstado(campoEstado.getText());
-            c.setPais(campoPais.getText());
+            pegarCampo(c);
 
         } catch (NumberFormatException ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //cadastrar o cliente no controlador de cliente
         try {
             clienteControle.create(c);
 
         } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-                }
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         // limpar  todos os campos
         try {
-            campoCEP.setText("");
-            campoCPF.setText("");
-            campoCidade.setText("");
-            campoComplemento.setText("");
-            campoEstado.setText("");
-            campoIdade.setText("");
-            campoNome.setText("");
-            campoNumero.setText("");
-            campoPais.setText("");
-            campoRua.setText("");
+            limparCampos();
+
         } catch (Exception ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -284,10 +296,29 @@ public class CadastrarCliente extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.setVisible(false);
         new Principal().setVisible(true);
-            
+
     }//GEN-LAST:event_bHomeActionPerformed
 
-       public static void main(String args[]) {
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeActionPerformed
+
+    private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+    }//GEN-LAST:event_bLimparActionPerformed
+
+    private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
+        // TODO add your handling code here:
+       clienteControle.readAll();
+       
+            
+    }//GEN-LAST:event_bProximoActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -326,6 +357,7 @@ public class CadastrarCliente extends javax.swing.JPanel {
     private javax.swing.JButton bCadastrar;
     private javax.swing.JButton bDeletar;
     private javax.swing.JButton bHome;
+    private javax.swing.JButton bLimpar;
     private javax.swing.JButton bProximo;
     private javax.swing.JTextField campoCEP;
     private javax.swing.JTextField campoCPF;
@@ -337,7 +369,6 @@ public class CadastrarCliente extends javax.swing.JPanel {
     private javax.swing.JTextField campoNumero;
     private javax.swing.JTextField campoPais;
     private javax.swing.JTextField campoRua;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelCEP;
     private javax.swing.JLabel labelCPF;
     private javax.swing.JLabel labelCidade;
