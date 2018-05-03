@@ -72,6 +72,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         bAlterar.setText("Alterar");
 
         bDeletar.setText("Deletar");
+        bDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDeletarActionPerformed(evt);
+            }
+        });
 
         bVoltar.setText("Voltar");
         bVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -299,13 +304,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 limparCampos();// limpar  todos os campos
             } 
             
-                    JOptionPane.showMessageDialog(null, "Deus eh mais!");
-        /*try {
-            clienteControle.create(c);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }*/
+            JOptionPane.showMessageDialog(null, "Deus eh mais!");
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -330,6 +329,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
        
             
     }//GEN-LAST:event_bProximoActionPerformed
+
+    private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
+        clienteControle = new ClienteController();
+        
+        ObjectOutputStream escritor = clienteControle.CriaEscritorBinario(diretorio, false);
+
+        clienteControle.getArray().remove(aux);
+
+        clienteControle.EscreveObjeto(escritor, clienteControle.getArray(), true);
+        JOptionPane.showMessageDialog(null, "Removido!");  
+    }//GEN-LAST:event_bDeletarActionPerformed
 
     /**
      * @param args the command line arguments
