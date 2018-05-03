@@ -361,9 +361,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             aux++;
             clienteControle = new ClienteController();
             ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
-            clientes = clienteControle.carregaClientes(leitor);
-
-            
+            clientes = clienteControle.carregaClientes(leitor);  
             campoNome.setText(clientes.get(aux).getNome());
             campoRua.setText(clientes.get(aux).getEndereco().getRua());      
             campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
