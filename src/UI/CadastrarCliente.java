@@ -386,9 +386,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
         ObjectOutputStream escritor = clienteControle.CriaEscritorBinario(diretorio, false);
 
-        clienteControle.getArray().remove(aux);
-
-        clienteControle.EscreveObjeto(escritor, clienteControle.getArray(), true);
+        clientes = clienteControle.getArray();
+        clientes.remove(clientes.get(aux));
+        clienteControle.EscreveObjeto(escritor, clientes, true);
         JOptionPane.showMessageDialog(null, "Removido!");  
     }//GEN-LAST:event_bDeletarActionPerformed
 
