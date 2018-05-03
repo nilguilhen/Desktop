@@ -4,6 +4,7 @@ import Controller.ClienteController;
 import Model.Cliente;
 import java.io.File;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private ClienteController clienteControle = null;
     private File diretorio = null;
     private int aux = -1;
+    private ArrayList<Cliente> cliente = new ArrayList();
 
     public CadastrarCliente() {
         initComponents();
@@ -256,7 +258,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         campoRua.setText("");
     }
 
-    public void pegarCampo(Cliente c) {
+    public Cliente pegarCampo(Cliente c) {
         c.setNome(campoNome.getText());
         c.setCpf(campoCPF.getText());
         c.setIdade(Integer.parseInt(campoIdade.getText()));
@@ -267,6 +269,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
         c.setCep(campoCEP.getText());
         c.setEstado(campoEstado.getText());
         c.setPais(campoPais.getText());
+        
+        return c;
     }
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         aux++;
@@ -278,19 +282,21 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
                
                 Cliente c = new Cliente();
-                pegarCampo(c);//setar todos os atributos do cliente
-                clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+                c = pegarCampo(c);//setar todos os atributos do cliente
+                cliente.add(c);
+                //clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, cliente, true);
                 limparCampos();
                 
             }else{
                 diretorio = clienteControle.selecionaArquivo();
                 ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
                 
-                Cliente c = new Cliente();   
-                pegarCampo(c);//setar todos os atributos do cliente
-                clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+                Cliente c = new Cliente(); 
+                c = pegarCampo(c);//setar todos os atributos do cliente
+                cliente.add(c);
+                //clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, cliente, true);
                 limparCampos();// limpar  todos os campos
             } 
             
