@@ -39,5 +39,32 @@ public class Concessionaria {
     public void setTarifa(float tarifa) {
         this.tarifa = tarifa;
     }
-    
+
+    public void setRua(String rua) {
+        endereco.setRua(rua);
+    }
+
+    public void setNumero(int numero) {
+        endereco.setNumero(numero);
+    }
+
+    public void setComplemento(String comp) {
+        endereco.setComplemento(comp);
+    }
+
+    public void setCidade(String cidade) {
+        endereco.setCidade(cidade);
+    }
+
+    public void setEstado(String estado) {
+        endereco.setEstado(estado);
+    }
+
+    public void setPais(String pais) {
+        endereco.setPais(pais);
+    }
+
+    public void setCep(String cep) {
+        endereco.setCep(cep);
+    }    
 }

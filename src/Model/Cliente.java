@@ -1,7 +1,7 @@
 package Model;
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
     Endereco endereco = new Endereco();
 

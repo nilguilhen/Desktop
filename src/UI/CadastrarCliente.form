@@ -54,7 +54,7 @@
                           <Component id="bCadastrar" alignment="0" max="32767" attributes="0"/>
                           <Component id="bAlterar" alignment="0" max="32767" attributes="0"/>
                           <Component id="bDeletar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="bHome" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bVoltar" alignment="0" max="32767" attributes="0"/>
                           <Component id="bProximo" alignment="1" max="32767" attributes="0"/>
                           <Component id="bAnterior" alignment="1" max="32767" attributes="0"/>
                       </Group>
@@ -122,7 +122,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoCEP" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bHome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -180,12 +180,12 @@
         <Property name="text" type="java.lang.String" value="Deletar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bHome">
+    <Component class="javax.swing.JButton" name="bVoltar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Home"/>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bHomeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVoltarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bProximo">

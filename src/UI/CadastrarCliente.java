@@ -2,13 +2,17 @@ package UI;
 
 import Controller.ClienteController;
 import Model.Cliente;
+import java.io.File;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CadastrarCliente extends javax.swing.JFrame {
 
-    private ClienteController clienteControle;
+    private ClienteController clienteControle = null;
+    private File diretorio = null;
+    private int aux = -1;
 
     public CadastrarCliente() {
         initComponents();
@@ -28,7 +32,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         bCadastrar = new javax.swing.JButton();
         bAlterar = new javax.swing.JButton();
         bDeletar = new javax.swing.JButton();
-        bHome = new javax.swing.JButton();
+        bVoltar = new javax.swing.JButton();
         bProximo = new javax.swing.JButton();
         bAnterior = new javax.swing.JButton();
         labelComplemento = new javax.swing.JLabel();
@@ -68,10 +72,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         bDeletar.setText("Deletar");
 
-        bHome.setText("Home");
-        bHome.addActionListener(new java.awt.event.ActionListener() {
+        bVoltar.setText("Voltar");
+        bVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bHomeActionPerformed(evt);
+                bVoltarActionPerformed(evt);
             }
         });
 
@@ -160,7 +164,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                             .addComponent(bCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -214,7 +218,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCEP)
                     .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bHome))
+                    .addComponent(bVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEstado)
@@ -265,39 +269,46 @@ public class CadastrarCliente extends javax.swing.JFrame {
         c.setPais(campoPais.getText());
     }
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-        // TODO add your handling code here:
-        Cliente c = new Cliente();
-
-        //setar todos os atributos do cliente
-        try {
-            pegarCampo(c);
-
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        aux++;
         //cadastrar o cliente no controlador de cliente
-        try {
+        
+            if(diretorio == null){
+                clienteControle = new ClienteController();
+                diretorio = clienteControle.selecionaArquivo();
+                ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
+               
+                Cliente c = new Cliente();
+                pegarCampo(c);//setar todos os atributos do cliente
+                clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+                limparCampos();
+                
+            }else{
+                diretorio = clienteControle.selecionaArquivo();
+                ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
+                
+                Cliente c = new Cliente();   
+                pegarCampo(c);//setar todos os atributos do cliente
+                clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+                limparCampos();// limpar  todos os campos
+            } 
+            
+                    JOptionPane.showMessageDialog(null, "filha da puta!");
+        /*try {
             clienteControle.create(c);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        // limpar  todos os campos
-        try {
-            limparCampos();
-
-        } catch (Exception ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_bCadastrarActionPerformed
 
-    private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
+    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new Principal().setVisible(true);
 
-    }//GEN-LAST:event_bHomeActionPerformed
+    }//GEN-LAST:event_bVoltarActionPerformed
 
     private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
         // TODO add your handling code here:
@@ -356,9 +367,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton bAnterior;
     private javax.swing.JButton bCadastrar;
     private javax.swing.JButton bDeletar;
-    private javax.swing.JButton bHome;
     private javax.swing.JButton bLimpar;
     private javax.swing.JButton bProximo;
+    private javax.swing.JButton bVoltar;
     private javax.swing.JTextField campoCEP;
     private javax.swing.JTextField campoCPF;
     private javax.swing.JTextField campoCidade;
