@@ -356,7 +356,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
             campoCPF.setText(clientes.get(aux).getCpf());
             campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
 
-            //comboBanda.setSelectedIndex(musico.get(indice).getBandaSelecionada());
         } else if (aux < clientes.size() - 1) {
             aux++;
             clienteControle = new ClienteController();
@@ -373,7 +372,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
             campoCPF.setText(clientes.get(aux).getCpf());
             campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
 
-            // comboBanda.setSelectedIndex(musico.get(indice).getBandaSelecionada());
         }
 
 
