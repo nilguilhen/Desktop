@@ -129,6 +129,12 @@ public class ClienteController {
         return clienteDB;
     }
     
+    public ArrayList<Cliente> carregaClientes(ObjectInputStream leitor){
+        clienteDB = (ArrayList<Cliente>) LeObjeto(leitor);
+
+        return clienteDB;
+    }
+    
 }
 
 
