@@ -3,6 +3,7 @@ package UI;
 import Controller.ClienteController;
 import Model.Cliente;
 import java.io.File;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private ClienteController clienteControle = null;
     private File diretorio = null;
+    private ArrayList<Cliente> clientes = new ArrayList();
     private int aux = -1;
 
     public CadastrarCliente() {
@@ -268,38 +270,38 @@ public class CadastrarCliente extends javax.swing.JFrame {
         c.setCep(campoCEP.getText());
         c.setEstado(campoEstado.getText());
         c.setPais(campoPais.getText());
-        
+
         return c;
     }
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         aux++;
         //cadastrar o cliente no controlador de cliente
-        
-            if(diretorio == null){
-                clienteControle = new ClienteController();
-                diretorio = clienteControle.selecionaArquivo();
-                ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
-               
-                Cliente c = new Cliente();
-                c = pegarCampo(c);//setar todos os atributos do cliente
-                //cliente.add(c);
-                clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
-                limparCampos();
-                
-            }else{
-                diretorio = clienteControle.selecionaArquivo();
-                ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false); 
-                
-                Cliente c = new Cliente(); 
-                c = pegarCampo(c);//setar todos os atributos do cliente
-                //cliente.add(c);
-                clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
-                limparCampos();// limpar  todos os campos
-            } 
-            
-                    JOptionPane.showMessageDialog(null, "Deus eh mais!");
+
+        if (diretorio == null) {
+            clienteControle = new ClienteController();
+            diretorio = clienteControle.selecionaArquivo();
+            ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false);
+
+            Cliente c = new Cliente();
+            c = pegarCampo(c);//setar todos os atributos do cliente
+            //cliente.add(c);
+            clienteControle.setArray(c);
+            clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+            limparCampos();
+
+        } else {
+            diretorio = clienteControle.selecionaArquivo();
+            ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false);
+
+            Cliente c = new Cliente();
+            c = pegarCampo(c);//setar todos os atributos do cliente
+            //cliente.add(c);
+            clienteControle.setArray(c);
+            clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
+            limparCampos();// limpar  todos os campos
+        }
+
+        JOptionPane.showMessageDialog(null, "Deus eh mais!");
         /*try {
             clienteControle.create(c);
 
@@ -326,9 +328,50 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
         // TODO add your handling code here:
-       clienteControle.readAll();
-       
+       int ind = 0;
+       if (diretorio == null){            
+            aux = 0;
+            clienteControle = new ClienteController();
+            diretorio = clienteControle.selecionaArquivo();
+            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
+            clientes = clienteControle.getArray();
+            //txtNome.setText(musico.get(indice).getNome());
+            campoNome.setText(clientes.get(aux).getNome());
+            campoRua.setText(clientes.get(aux).getEndereco().getRua());      
+            campoNumero.setText(clientes.get(aux).getEndereco().getNumero());
+            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
+            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
+            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
+            campoPais.setText(clientes.get(aux).getEndereco().getPais());
+            campoCPF.setText(clientes.get(aux).getCpf());
+            campoIdade.setText(clientes.get(aux).getIdade());
             
+            
+            
+            //comboBanda.setSelectedIndex(musico.get(indice).getBandaSelecionada());
+        }
+        else if (aux < clientes.size()-1){
+            aux++;
+            clienteControle = new ClienteController();
+            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
+            clientes = clienteControle.getArray();
+            campoNome.setText(clientes.get(aux).getNome());
+            campoRua.setText(clientes.get(aux).getEndereco().getRua());      
+            campoNumero.setText(clientes.get(aux).getEndereco().getNumero());
+            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
+            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
+            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
+            campoPais.setText(clientes.get(aux).getEndereco().getPais());
+            campoCPF.setText(clientes.get(aux).getCpf());
+            campoIdade.setText(clientes.get(aux).getIdade());
+            
+           // comboBanda.setSelectedIndex(musico.get(indice).getBandaSelecionada());
+        }
+       
+
+
     }//GEN-LAST:event_bProximoActionPerformed
 
     /**
