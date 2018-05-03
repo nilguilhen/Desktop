@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 public class ClienteController {
     File arquivo = null;
-    private ArrayList<Cliente> clienteDB;
+    private ArrayList<Cliente> clienteDB = new ArrayList();
 
     public ClienteController() {
 
@@ -123,7 +123,7 @@ public class ClienteController {
     }    
     
     public void setArray(Cliente c){
-        this.clienteDB.add(c);
+        clienteDB.add(c);
     }
     public ArrayList<Cliente> getArray(){
         return clienteDB;

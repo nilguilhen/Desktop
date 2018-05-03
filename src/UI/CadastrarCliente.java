@@ -14,7 +14,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private ClienteController clienteControle = null;
     private File diretorio = null;
     private int aux = -1;
-    private ArrayList<Cliente> cliente = new ArrayList();
 
     public CadastrarCliente() {
         initComponents();
@@ -283,9 +282,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                
                 Cliente c = new Cliente();
                 c = pegarCampo(c);//setar todos os atributos do cliente
-                cliente.add(c);
-                //clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, cliente, true);
+                //cliente.add(c);
+                clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
                 limparCampos();
                 
             }else{
@@ -294,13 +293,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 
                 Cliente c = new Cliente(); 
                 c = pegarCampo(c);//setar todos os atributos do cliente
-                cliente.add(c);
-                //clienteControle.setArray(c);
-                clienteControle.EscreveObjeto(escritaBinario, cliente, true);
+                //cliente.add(c);
+                clienteControle.setArray(c);
+                clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
                 limparCampos();// limpar  todos os campos
             } 
             
-                    JOptionPane.showMessageDialog(null, "filha da puta!");
+                    JOptionPane.showMessageDialog(null, "Deus eh mais!");
         /*try {
             clienteControle.create(c);
 
