@@ -166,7 +166,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Cliente clienteSelecionado(){
         //seleciona o cliente pelo cpf, para acharmos o estado dele e comparar com a conc e pegar a tarifa
         ClienteController cc = new ClienteController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Desktop\\Trab2\\Clientes.txt");
+        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Cliente> clientes = cc.carregaClientes(leitor);
         
@@ -182,7 +182,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Concessionaria concessionariaSelecionado(){
          //estado que tem o estado igual do cliente
         ConcessionariaController cc = new ConcessionariaController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Desktop\\Trab2\\Conc.txt");
+        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Conc.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Concessionaria> concessionarias = cc.carregaConcessionarias(leitor);
         
