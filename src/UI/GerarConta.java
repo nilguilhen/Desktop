@@ -2,14 +2,22 @@ package UI;
 
 import Controller.ClienteController;
 import Controller.ConcessionariaController;
+import Controller.ContaController;
 import Model.Cliente;
 import Model.Concessionaria;
+import Model.ContaEnergia;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 
 public class GerarConta extends javax.swing.JFrame {
+
+    private int aux = -1;
+    private ContaController contaController = null;
+    private ArrayList<ContaEnergia> contas = new ArrayList();
+    private File diretorio = null;
 
     public GerarConta() {
         initComponents();
@@ -19,9 +27,9 @@ public class GerarConta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        labelCPF = new javax.swing.JLabel();
+        labelKWH = new javax.swing.JLabel();
+        labelValor = new javax.swing.JLabel();
         campoCpf = new javax.swing.JTextField();
         campoValor = new javax.swing.JTextField();
         campoKwh = new javax.swing.JTextField();
@@ -35,11 +43,11 @@ public class GerarConta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Cpf:");
+        labelCPF.setText("Cpf:");
 
-        jLabel2.setText("Khw/mês:");
+        labelKWH.setText("Khw/mês:");
 
-        jLabel3.setText("Valor da conta:");
+        labelValor.setText("Valor da conta:");
 
         campoCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,9 +116,9 @@ public class GerarConta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(labelCPF)
+                            .addComponent(labelKWH)
+                            .addComponent(labelValor))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(campoCpf)
@@ -124,7 +132,7 @@ public class GerarConta extends javax.swing.JFrame {
                             .addComponent(bVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,65 +150,103 @@ public class GerarConta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bProximo))
+                        .addComponent(bProximo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bAnterior))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
+                            .addComponent(labelCPF)
                             .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(labelKWH)
                             .addComponent(campoKwh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(labelValor)
                             .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bAnterior)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        pack();
+        setBounds(0, 0, 466, 358);
     }// </editor-fold>//GEN-END:initComponents
 
-    public Cliente clienteSelecionado(){
+    public Cliente clienteSelecionado() {
         //seleciona o cliente pelo cpf, para acharmos o estado dele e comparar com a conc e pegar a tarifa
         ClienteController cc = new ClienteController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Desktop\\Trab2\\Clientes.txt");
+        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Cliente> clientes = cc.carregaClientes(leitor);
-        
+
         Cliente cliSelecionado = null;
-        for (int i=0; i<clientes.size(); i++){
-            if (clientes.get(i).getCpf().equals(campoCpf.getText())){
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getCpf().equals(campoCpf.getText())) {
                 cliSelecionado = clientes.get(i);
             }
         }
         return cliSelecionado;
     }
-    
-    public Concessionaria concessionariaSelecionado(){
-         //estado que tem o estado igual do cliente
+
+    public Concessionaria concessionariaSelecionado() {
+        //estado que tem o estado igual do cliente
         ConcessionariaController cc = new ConcessionariaController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Desktop\\Trab2\\Conc.txt");
+        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Conc.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Concessionaria> concessionarias = cc.carregaConcessionarias(leitor);
-        
+
         Concessionaria concSelecionado = null;
         Cliente cliente = clienteSelecionado();
-        for (int i=0; i<concessionarias.size(); i++){
-            if (concessionarias.get(i).getEndereco().getEstado().equals(cliente.getEndereco().getEstado())){
+        for (int i = 0; i < concessionarias.size(); i++) {
+            if (concessionarias.get(i).getEndereco().getEstado().equals(cliente.getEndereco().getEstado())) {
                 concSelecionado = concessionarias.get(i);
             }
         }
         return concSelecionado;
     }
-           
+
+    public ContaEnergia pegarCampo(ContaEnergia c) {
+        c.setKwh(Float.parseFloat(campoKwh.getText()));
+
+        return c;
+    }
+
+    public void limparCampos() {
+        campoCpf.setText("");
+        campoKwh.setText("");
+        campoValor.setText("");
+    }
     private void campoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoCpfActionPerformed
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        aux++;
+        //cadastrar o cliente no controlador de cliente
+
+        if (diretorio == null) {
+            contaController = new ContaController();
+            diretorio = contaController.selecionaArquivo();
+            ObjectOutputStream escritaBinario = contaController.CriaEscritorBinario(diretorio, false);
+
+            ContaEnergia c = new ContaEnergia();
+            c = pegarCampo(c);//setar todos os atributos do cliente
+            contaController.setArray(c);
+            contaController.EscreveObjeto(escritaBinario, contaController.getArray(), true);
+            limparCampos();
+
+        } else {
+            //diretorio = clienteControle.selecionaArquivo();
+            ObjectOutputStream escritaBinario = contaController.CriaEscritorBinario(diretorio, false);
+
+            Cliente c = new Cliente();
+            c = pegarCampo(c);//setar todos os atributos do cliente
+            contaController.setArray(c);
+            contaController.EscreveObjeto(escritaBinario, contaController.getArray(), true);
+            limparCampos();// limpar  todos os campos
+        }
+
+        JOptionPane.showMessageDialog(null, "Deus eh mais!");
+
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -219,42 +265,18 @@ public class GerarConta extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
-       
+
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
 
-   
+
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
-        float resultado;
-        Concessionaria c = new Concessionaria();
-        c = selecionado();
-        resultado = (c.getTarifa() * Float.parseFloat(campoKwh.getText()));
-        campoValor.setText(String.valueOf(resultado));
-        
+
     }//GEN-LAST:event_bLimparActionPerformed
 
-    public Concessionaria selecionado(){
-        
-         ArrayList<Cliente> arrayCliente = new ArrayList(); 
-         ArrayList<Concessionaria> arrayConce = new ArrayList();
-         ClienteController cc = new ClienteController();
-         ConcessionariaController cl = new ConcessionariaController();
-         
-         arrayCliente = cc.getArray();
-         arrayConce = cl.getArray();
-         
-         
-         Concessionaria selecionado = null;
-        for (int i=0; i<arrayCliente.size(); i++){
-            if (arrayCliente.get(i).getEndereco().getEstado().equals(arrayConce.get(i).getEndereco().getEstado())){
-                selecionado = arrayConce.get(i);
-            }
-        }
-        return selecionado;
-    }
     /**
      * @param args the command line arguments
      */
@@ -301,8 +323,8 @@ public class GerarConta extends javax.swing.JFrame {
     private javax.swing.JTextField campoCpf;
     private javax.swing.JTextField campoKwh;
     private javax.swing.JTextField campoValor;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel labelCPF;
+    private javax.swing.JLabel labelKWH;
+    private javax.swing.JLabel labelValor;
     // End of variables declaration//GEN-END:variables
 }
