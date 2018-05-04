@@ -238,7 +238,7 @@ public class GerarConta extends javax.swing.JFrame {
             //diretorio = clienteControle.selecionaArquivo();
             ObjectOutputStream escritaBinario = contaController.CriaEscritorBinario(diretorio, false);
 
-            Cliente c = new Cliente();
+            ContaEnergia c = new ContaEnergia();
             c = pegarCampo(c);//setar todos os atributos do cliente
             contaController.setArray(c);
             contaController.EscreveObjeto(escritaBinario, contaController.getArray(), true);
