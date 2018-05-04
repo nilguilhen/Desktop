@@ -70,6 +70,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
 
         bAlterar.setText("Alterar");
+        bAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAlterarActionPerformed(evt);
+            }
+        });
 
         bDeletar.setText("Deletar");
         bDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -385,7 +390,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         clientes = clienteControle.getArray();
         clientes.remove(clientes.get(aux));
         clienteControle.EscreveObjeto(escritor, clientes, true);
-        JOptionPane.showMessageDialog(null, "Removido!");  
+        JOptionPane.showMessageDialog(null, "Removido!");
         clienteControle.getArray().remove(aux);
 
         clienteControle.EscreveObjeto(escritor, clienteControle.getArray(), true);
@@ -412,6 +417,31 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_bAnteriorActionPerformed
+
+    private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
+        // TODO add your handling code here:
+
+        if (diretorio != null) {
+            clienteControle = new ClienteController();
+            ObjectOutputStream escritor = clienteControle.CriaEscritorBinario(diretorio, false);
+
+            Cliente cl = new Cliente();
+            cl.setNome(campoNome.getText());
+            cl.setCpf(campoCPF.getText());
+            cl.setIdade(Integer.parseInt(campoIdade.getText()));
+            cl.setRua(campoRua.getText());
+            cl.setNumero(Integer.parseInt(campoNumero.getText()));
+            cl.setComplemento(campoComplemento.getText());
+            cl.setCidade(campoCidade.getText());
+            cl.setCep(campoCEP.getText());
+            cl.setEstado(campoEstado.getText());
+            cl.setPais(campoPais.getText());
+            clientes.set(aux, cl);
+
+            clienteControle.EscreveObjeto(escritor, clientes, true);
+            JOptionPane.showMessageDialog(null, "Editado com Sucesso!");
+        }
+    }//GEN-LAST:event_bAlterarActionPerformed
 
     /**
      * @param args the command line arguments
