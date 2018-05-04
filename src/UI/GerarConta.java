@@ -205,11 +205,11 @@ public class GerarConta extends javax.swing.JFrame {
     }
 
     public ContaEnergia pegarCampo(ContaEnergia c) {
-        Concessionaria concSelecionado = concessionariaSelecionado();        
+        Concessionaria concSelecionado = concessionariaSelecionado();
         c.setCpf(campoCpf.getText());
         c.setKwh(Float.parseFloat(campoKwh.getText()));
-        c.setValor((concSelecionado.getTarifa())*(Float.parseFloat(campoKwh.getText())));
-        
+        c.setValor((concSelecionado.getTarifa()) * (Float.parseFloat(campoKwh.getText())));
+
         return c;
     }
 
@@ -269,7 +269,27 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
+        if (diretorio == null) {
+            aux = 0;
+            contaController = new ContaController();
+            diretorio = contaController.selecionaArquivo();
 
+            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
+            contas = contaController.carregaContas(leitor);
+
+            campoCpf.setText(contas.get(aux).getCpf());
+            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
+            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
+        } else if (aux < contas.size() - 1) {
+            aux++;
+            contaController = new ContaController();
+            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
+            contas = contaController.carregaContas(leitor);
+
+            campoCpf.setText(contas.get(aux).getCpf());
+            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
+            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
+        }
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
