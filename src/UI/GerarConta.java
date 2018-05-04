@@ -26,12 +26,12 @@ public class GerarConta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
         labelInformarCPF = new javax.swing.JLabel();
         labelInformarKWH = new javax.swing.JLabel();
         campocontaCPF = new javax.swing.JTextField();
         campocontaKWH = new javax.swing.JTextField();
+<<<<<<< HEAD
 <<<<<<< HEAD
         bCadastrar = new javax.swing.JButton();
         bAlterar = new javax.swing.JButton();
@@ -49,6 +49,10 @@ public class GerarConta extends javax.swing.JFrame {
         bGerar = new javax.swing.JButton();
         bHome = new javax.swing.JButton();
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
+=======
+        bGerar = new javax.swing.JButton();
+        bSair = new javax.swing.JButton();
+>>>>>>> parent of f94de6e... gerar conta
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,13 +65,14 @@ public class GerarConta extends javax.swing.JFrame {
         labelInformarKWH.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelInformarKWH.setText("Informe seu Kwh/mes:");
 
-        bCadastrar.setText("Cadastrar");
-        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        bGerar.setText("Gerar Conta");
+        bGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCadastrarActionPerformed(evt);
+                bGerarActionPerformed(evt);
             }
         });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         bAlterar.setText("Alterar");
         bAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -79,55 +84,21 @@ public class GerarConta extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bHomeActionPerformed(evt);
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
-            }
-        });
-
-        bDeletar.setText("Deletar");
-        bDeletar.addActionListener(new java.awt.event.ActionListener() {
+=======
+        bSair.setText("Sair");
+        bSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bDeletarActionPerformed(evt);
+                bSairActionPerformed(evt);
+>>>>>>> parent of f94de6e... gerar conta
             }
         });
-
-        bVoltar.setText("Home");
-        bVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bVoltarActionPerformed(evt);
-            }
-        });
-
-        bProximo.setText("Próximo");
-        bProximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bProximoActionPerformed(evt);
-            }
-        });
-
-        bAnterior.setText("Anterior");
-        bAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAnteriorActionPerformed(evt);
-            }
-        });
-
-        bLimpar.setText("Limpar");
-        bLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bLimparActionPerformed(evt);
-            }
-        });
-
-        labelValor.setText("Valor da Conta:");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("O valor da conta é gerado após ser cadastrado os dados\nNÃO É POSSIVEL ALTERAR OU DELETAR O VALOR DA CONTA\nPARA ALTERAR O VALOR, NECESSARIO ALTERAR O KWH.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
 <<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -161,6 +132,8 @@ public class GerarConta extends javax.swing.JFrame {
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
 =======
+=======
+>>>>>>> parent of f94de6e... gerar conta
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelInformarKWH)
@@ -172,16 +145,24 @@ public class GerarConta extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(bGerar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
                             .addComponent(bHome))
                         .addComponent(campocontaKWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                         .addComponent(campocontaCPF, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(116, Short.MAX_VALUE))
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
+=======
+                            .addComponent(bSair))
+                        .addComponent(campocontaKWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                        .addComponent(campocontaCPF, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(116, Short.MAX_VALUE))
+>>>>>>> parent of f94de6e... gerar conta
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
 <<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -220,6 +201,8 @@ public class GerarConta extends javax.swing.JFrame {
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
 =======
+=======
+>>>>>>> parent of f94de6e... gerar conta
                 .addComponent(labelTitulo)
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,14 +215,20 @@ public class GerarConta extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bGerar)
+<<<<<<< HEAD
                     .addComponent(bHome))
                 .addContainerGap(67, Short.MAX_VALUE))
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
+=======
+                    .addComponent(bSair))
+                .addContainerGap(67, Short.MAX_VALUE))
+>>>>>>> parent of f94de6e... gerar conta
         );
 
-        setBounds(0, 0, 523, 383);
+        setBounds(0, 0, 475, 349);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
       
@@ -258,9 +247,13 @@ public class GerarConta extends javax.swing.JFrame {
 =======
     private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
+=======
+    private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
+>>>>>>> parent of f94de6e... gerar conta
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
         new Principal().setVisible(true);
+<<<<<<< HEAD
 <<<<<<< HEAD
     }//GEN-LAST:event_bVoltarActionPerformed
 =======
@@ -270,17 +263,33 @@ public class GerarConta extends javax.swing.JFrame {
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
     
     }//GEN-LAST:event_bProximoActionPerformed
+=======
+    }//GEN-LAST:event_bSairActionPerformed
+>>>>>>> parent of f94de6e... gerar conta
 
-    private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
-
-    }//GEN-LAST:event_bAnteriorActionPerformed
-
-    private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
-
-    }//GEN-LAST:event_bLimparActionPerformed
+    private void bGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarActionPerformed
+        // TODO add your handling code here:
+        ContaController cc = new ContaController();
+        try {
+            resultado = cc.geraConta(campocontaCPF.getText(), Float.parseFloat(campocontaKWH.getText()));
+            JOptionPane.showMessageDialog(rootPane, String.valueOf(resultado));
+            /* try {
+            if (cc.geraConta(campocontaCPF.getText(), (Float.parseFloat(campocontaKWH.getText()))) == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Erro!");
+            } else
+            JOptionPane.showMessageDialog(rootPane, cc.geraConta(campocontaCPF.getText(), (Float.parseFloat(campocontaKWH.getText()))));
+            
+            } catch (Exception ex) {
+            Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        } catch (Exception ex) {
+            Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bGerarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
 <<<<<<< HEAD
     private javax.swing.JButton bAlterar;
     private javax.swing.JButton bAnterior;
@@ -294,13 +303,14 @@ public class GerarConta extends javax.swing.JFrame {
     private javax.swing.JButton bGerar;
     private javax.swing.JButton bHome;
 >>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
+=======
+    private javax.swing.JButton bGerar;
+    private javax.swing.JButton bSair;
+>>>>>>> parent of f94de6e... gerar conta
     private javax.swing.JTextField campocontaCPF;
     private javax.swing.JTextField campocontaKWH;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelInformarCPF;
     private javax.swing.JLabel labelInformarKWH;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JLabel labelValor;
     // End of variables declaration//GEN-END:variables
 }

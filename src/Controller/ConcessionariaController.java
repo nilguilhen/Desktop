@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class ConcessionariaController {
  
     File arquivo = null;
-    private ArrayList<Concessionaria> concessionariaDB = new ArrayList();
+    private ArrayList<Concessionaria> concessionariaDB;
 
     
     public ConcessionariaController(){}

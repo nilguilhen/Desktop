@@ -320,7 +320,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
             Concessionaria c = new Concessionaria();
             c = pegarCampo(c);//setar todos os atributos
-            concessionariaControle.setArray(c);
             concessionariaControle.EscreveObjeto(escritaBinario, concessionariaControle.getArray(), true);
             limparCampos();
         }
