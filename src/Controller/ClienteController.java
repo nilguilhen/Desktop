@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -18,44 +16,7 @@ public class ClienteController {
     File arquivo = null;
     private ArrayList<Cliente> clienteDB = new ArrayList();
 
-    public ClienteController() {
-
-    }
-
-    public void create(Cliente cliente) throws Exception {
-        if (clienteDB.add(cliente) == false){
-            throw new Exception("Cliente ja existe");
-        }
-    }
-    
-    public Cliente readByCpf(String cpf) {
-        return clienteDB.stream().filter(cliente-> cliente.getCpf().equalsIgnoreCase(cpf)).findAny().get();
-    }
-
-    public Cliente readByName(String nome) {
-        return clienteDB.stream().filter(cliente -> cliente.getNome().equalsIgnoreCase(nome)).findAny().get();
-    }
-
-    public ArrayList<Cliente> readAll() {
-        return clienteDB;
-    }
-
-    public void update (Cliente newCliente, String nome) {
-        Cliente clienteAtual = this.readByName(nome);
-
-        if (clienteAtual != null) {
-            clienteAtual.setNome(newCliente.getNome());
-            clienteAtual.setCpf(newCliente.getCpf());
-            clienteAtual.setIdade(newCliente.getIdade());
-        }
-    }
-
-    public void delete (String cpf) {
-        Cliente clienteAtual = this.readByCpf(cpf);
-
-        if (clienteAtual != null) 
-            clienteDB.removeIf(cliente -> cliente.equals(clienteAtual));
-    }
+    public ClienteController() {}
     
     public ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
         ObjectOutputStream out = null;

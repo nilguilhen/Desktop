@@ -1,54 +1,100 @@
 package Controller;
 
 import Model.Concessionaria;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class ConcessionariaController {
  
+    File arquivo = null;
+    private ArrayList<Concessionaria> concessionariaDB;
+
     
-    private Set<Concessionaria> concessionariaDB;
+    public ConcessionariaController(){}
 
-    public ConcessionariaController() {
-
-    this.concessionariaDB = new HashSet<>();
+     public ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream(arquivo, append));
+        } catch (IOException erro) {
+            System.out.println("Erro ao criar arquivo. " + erro);
+        }
+        return out;
     }
 
-    public void create(Concessionaria concessionaria) throws Exception {
-        if (concessionariaDB.add(concessionaria) == false){
-            throw new Exception("Concessionaria ja existente");
+    public ObjectInputStream CriaLeitorBinario(File arquivo) {
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fis= new FileInputStream(arquivo);
+            ois = new ObjectInputStream(fis);
+        } catch (IOException erro) {
+            System.out.println("Erro ao ler arquivo. " + erro);
+        }
+        return ois;
+    }
+
+    public void EscreveObjeto(ObjectOutputStream oos, Object obj, boolean flush) {
+        try {
+            oos.writeObject(obj);
+            if (flush) {
+                oos.flush();
+            }
+        } catch (IOException erro) {
+            System.out.println("Erro na escrita. " + erro);
         }
     }
+
+    public Object LeObjeto(ObjectInputStream ois) {
+        Object objlido = null;
+        try {
+            objlido = ois.readObject();
+        } catch (ClassNotFoundException erro) {
+            System.out.println("Classe nao encontrada. "
+                    + erro);
+        } catch (java.io.EOFException erro) {
+            System.out.println("Final de arquivo. "
+                    + erro);
+        } catch (IOException erro) {
+            System.out.println("Erro na leitura do objeto. " + erro);
+        } finally {
+            return objlido;
+        }
+    }
+
+    public File selecionaArquivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int resultado = fileChooser.showSaveDialog(null);
+        if (resultado != JFileChooser.APPROVE_OPTION){
+            return null;
+        }
+        arquivo = fileChooser.getSelectedFile();
+        
+        if (arquivo.getName().equals("")) {
+            JOptionPane.showMessageDialog(null, "Nome de Arquivo Inválido", "Nome de Arquivo Inválido", JOptionPane.ERROR_MESSAGE);
+
+        }
+    return arquivo;    
+    }    
     
-    public Concessionaria readByCnpj(String cnpj) {
-        return concessionariaDB.stream().filter(concessionaria-> concessionaria.getCnpj().equalsIgnoreCase(cnpj)).findAny().get();
+    public void setArray(Concessionaria c){
+        concessionariaDB.add(c);
     }
-
-    public Concessionaria readByName(String nome) {
-        return concessionariaDB.stream().filter(concessionaria -> concessionaria.getNome().equalsIgnoreCase(nome)).findAny().get();
+    public ArrayList<Concessionaria> getArray(){
+        return concessionariaDB;
     }
+    
+    public ArrayList<Concessionaria> carregaConcessionarias(ObjectInputStream leitor){
+        concessionariaDB = (ArrayList<Concessionaria>) LeObjeto(leitor);
 
-    public Set<Concessionaria> readAll() {
         return concessionariaDB;
     }
 
-    public void update (Concessionaria newConcessionaria, String nome) {
-        Concessionaria concessionariaAtual = this.readByName(nome);
-
-        if (concessionariaAtual != null) {
-            concessionariaAtual.setNome(newConcessionaria.getNome());
-            concessionariaAtual.setCnpj(newConcessionaria.getCnpj());
-            concessionariaAtual.setTarifa(newConcessionaria.getTarifa());
-        }
-    }
-
-    public void delete (String cnpj) {
-        Concessionaria concessionariaAtual = this.readByCnpj(cnpj);
-
-        if (concessionariaAtual != null) 
-            concessionariaDB.removeIf(concessionaria -> concessionaria.equals(concessionariaAtual));
-    }
-    
-    
-   
 }
