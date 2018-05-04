@@ -294,7 +294,17 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
 
+        if (diretorio != null && aux != 0) {
+            aux--;
+            contaController = new ContaController();
+            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
+            contas = contaController.carregaContas(leitor);
 
+            campoCpf.setText(contas.get(aux).getCpf());
+            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
+            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
+        }
+            
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
