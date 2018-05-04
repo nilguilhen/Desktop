@@ -174,7 +174,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Cliente clienteSelecionado() {
         //seleciona o cliente pelo cpf, para acharmos o estado dele e comparar com a conc e pegar a tarifa
         ClienteController cc = new ClienteController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes");
+        File dir = new File("C:\\Users\\Neusa Helena\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Cliente> clientes = cc.carregaClientes(leitor);
 
@@ -190,7 +190,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Concessionaria concessionariaSelecionado() {
         //estado que tem o estado igual do cliente
         ConcessionariaController cc = new ConcessionariaController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Conc");
+        File dir = new File("C:\\Users\\Neusa Helena\\Documents\\GitHub\\Desktop\\Arquivos\\Conc");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Concessionaria> concessionarias = cc.carregaConcessionarias(leitor);
 
@@ -255,10 +255,31 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
 
+        JOptionPane.showMessageDialog(rootPane, "Por favor, altere somente os valores Kw/h");
+        if (diretorio != null) {
+            contaController = new ContaController();
+            ObjectOutputStream escritor = contaController.CriaEscritorBinario(diretorio, false);
+
+            ContaEnergia ce = new ContaEnergia();
+            pegarCampo(ce);
+            
+            contas.set(aux, ce);
+
+            contaController.EscreveObjeto(escritor, contas, true);
+        }
+        JOptionPane.showMessageDialog(null, "Dados Alterados com sucesso!");
+        
     }//GEN-LAST:event_bAlterarActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
 
+        contaController = new ContaController();
+        ObjectOutputStream escritor = contaController.CriaEscritorBinario(diretorio, false);
+
+        contas.remove(contas.get(aux));
+        contaController.EscreveObjeto(escritor, contas, true);
+        JOptionPane.showMessageDialog(null, "Removido!");
+        limparCampos();
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -293,7 +314,6 @@ public class GerarConta extends javax.swing.JFrame {
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
-
         if (diretorio != null && aux != 0) {
             aux--;
             contaController = new ContaController();
@@ -304,7 +324,7 @@ public class GerarConta extends javax.swing.JFrame {
             campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
             campoValor.setText(String.valueOf(contas.get(aux).getValor()));
         }
-            
+
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed

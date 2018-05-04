@@ -416,9 +416,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
             clientes.set(aux, cl);
 
             clienteControle.EscreveObjeto(escritor, clientes, true);
-            JOptionPane.showMessageDialog(null, "Dados Alterados!!");
         }
-        JOptionPane.showMessageDialog(null, "Acess Denied!");
+        JOptionPane.showMessageDialog(null, "Dados Alterados com sucesso!");
     }//GEN-LAST:event_bAlterarActionPerformed
 
     /**
