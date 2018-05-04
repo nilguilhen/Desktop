@@ -16,9 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class GerarConta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GerarConta
-     */
+    float resultado = 0;
+    
     public GerarConta() {
         initComponents();
     }
@@ -114,11 +113,17 @@ public class GerarConta extends javax.swing.JFrame {
         // TODO add your handling code here:
         ContaController cc = new ContaController();
         try {
+            resultado = cc.geraConta(campocontaCPF.getText(), Float.parseFloat(campocontaKWH.getText()));
+            JOptionPane.showMessageDialog(rootPane, String.valueOf(resultado));
+            /* try {
             if (cc.geraConta(campocontaCPF.getText(), (Float.parseFloat(campocontaKWH.getText()))) == 0) {
-                JOptionPane.showMessageDialog(rootPane, "Erro!");
+            JOptionPane.showMessageDialog(rootPane, "Erro!");
             } else
-                JOptionPane.showMessageDialog(rootPane, cc.geraConta(campocontaCPF.getText(), (Float.parseFloat(campocontaKWH.getText()))));
-                        
+            JOptionPane.showMessageDialog(rootPane, cc.geraConta(campocontaCPF.getText(), (Float.parseFloat(campocontaKWH.getText()))));
+            
+            } catch (Exception ex) {
+            Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
         } catch (Exception ex) {
             Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
         }

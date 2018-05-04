@@ -126,12 +126,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         labelNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelNome.setText("Nome");
 
-        campoNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNomeActionPerformed(evt);
-            }
-        });
-
         labelRua.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelRua.setText("Rua");
 
@@ -192,7 +186,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                             .addComponent(campoRua)
-                            .addComponent(campoNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(campoNome))
                         .addGap(34, 34, 34)
                         .addComponent(bLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
@@ -297,7 +291,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
             Cliente c = new Cliente();
             c = pegarCampo(c);//setar todos os atributos do cliente
-            //cliente.add(c);
             clienteControle.setArray(c);
             clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
             limparCampos();
@@ -308,7 +301,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
             Cliente c = new Cliente();
             c = pegarCampo(c);//setar todos os atributos do cliente
-            //cliente.add(c);
             clienteControle.setArray(c);
             clienteControle.EscreveObjeto(escritaBinario, clienteControle.getArray(), true);
             limparCampos();// limpar  todos os campos
@@ -316,12 +308,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, "Deus eh mais!");
 
-        /*try {
-            clienteControle.create(c);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }*/
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -330,11 +316,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         new Principal().setVisible(true);
 
     }//GEN-LAST:event_bVoltarActionPerformed
-
-    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoNomeActionPerformed
-
+    
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
         // TODO add your handling code here:
         limparCampos();
@@ -361,7 +343,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             campoCPF.setText(clientes.get(aux).getCpf());
             campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
 
-        } else if (aux < clientes.size() - 1) {
+        } else if (aux < clientes.size()-1) {
             aux++;
             clienteControle = new ClienteController();
             ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
@@ -389,7 +371,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         clientes.remove(clientes.get(aux));
         clienteControle.EscreveObjeto(escritor, clientes, true);
         JOptionPane.showMessageDialog(null, "Removido!");
-        limparCampos();
+        //limparCampos();
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
