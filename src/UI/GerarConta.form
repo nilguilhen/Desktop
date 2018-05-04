@@ -40,7 +40,7 @@
                       <Group type="102" attributes="0">
                           <Component id="bGerar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="bSair" min="-2" max="-2" attributes="0"/>
+                          <Component id="bHome" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="campocontaKWH" alignment="0" pref="198" max="32767" attributes="0"/>
                       <Component id="campocontaCPF" alignment="0" max="32767" attributes="0"/>
@@ -68,7 +68,7 @@
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bGerar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bHome" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
@@ -112,12 +112,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bGerarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="bSair">
+    <Component class="javax.swing.JButton" name="bHome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sair"/>
+        <Property name="text" type="java.lang.String" value="Home"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSairActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bHomeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

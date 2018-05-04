@@ -32,7 +32,7 @@ public class GerarConta extends javax.swing.JFrame {
         campocontaCPF = new javax.swing.JTextField();
         campocontaKWH = new javax.swing.JTextField();
         bGerar = new javax.swing.JButton();
-        bSair = new javax.swing.JButton();
+        bHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,10 +52,10 @@ public class GerarConta extends javax.swing.JFrame {
             }
         });
 
-        bSair.setText("Sair");
-        bSair.addActionListener(new java.awt.event.ActionListener() {
+        bHome.setText("Home");
+        bHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSairActionPerformed(evt);
+                bHomeActionPerformed(evt);
             }
         });
 
@@ -75,7 +75,7 @@ public class GerarConta extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(bGerar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bSair))
+                            .addComponent(bHome))
                         .addComponent(campocontaKWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                         .addComponent(campocontaCPF, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(116, Short.MAX_VALUE))
@@ -96,18 +96,18 @@ public class GerarConta extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bGerar)
-                    .addComponent(bSair))
+                    .addComponent(bHome))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 475, 349);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
+    private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new Principal().setVisible(true);
-    }//GEN-LAST:event_bSairActionPerformed
+    }//GEN-LAST:event_bHomeActionPerformed
 
     private void bGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarActionPerformed
         // TODO add your handling code here:
@@ -132,7 +132,7 @@ public class GerarConta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bGerar;
-    private javax.swing.JButton bSair;
+    private javax.swing.JButton bHome;
     private javax.swing.JTextField campocontaCPF;
     private javax.swing.JTextField campocontaKWH;
     private javax.swing.JLabel labelInformarCPF;

@@ -7,12 +7,15 @@ import UI.CadastrarCliente;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ContaController {
 
     private ArrayList<ContaEnergia> contaDB = new ArrayList();
+    ArrayList<Cliente> arrayCliente = new ArrayList();
+    ArrayList<Concessionaria> arrayConce = new ArrayList();
     ClienteController cc = new ClienteController();
-    Concessionaria con = new Concessionaria();
+    ConcessionariaController con = new ConcessionariaController();
     //Cliente cli = new Cliente();
 
     public ContaController() {
@@ -23,18 +26,16 @@ public class ContaController {
     }
 
     public float geraConta(String cpf, Float kwh) throws Exception {
-        
-        float resultado = 0;
-        ArrayList<Cliente> arrayCliente = new ArrayList();
-        ArrayList<Concessionaria> arrayConce = new ArrayList();
-        
-        try {
-             arrayCliente = cc.getArray();
-             if(arrayCliente.get(Integer.parseInt(cpf)).getEndereco().getEstado().equals(con.getEndereco().getEstado()) == true)
 
-            return resultado =(con.getTarifa() * (kwh));
-        }catch (NumberFormatException ex) {
-             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        float resultado = 0;
+        arrayCliente = cc.getArray();
+        arrayConce = con.getArray();
+
+        try {
+            resultado = ((arrayConce.get(Integer.parseInt(cpf)).getTarifa()) * (kwh));
+            JOptionPane.showMessageDialog(null, resultado);
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
     }

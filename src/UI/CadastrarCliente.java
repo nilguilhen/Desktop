@@ -33,7 +33,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         bCadastrar = new javax.swing.JButton();
         bAlterar = new javax.swing.JButton();
         bDeletar = new javax.swing.JButton();
-        bVoltar = new javax.swing.JButton();
+        bHome = new javax.swing.JButton();
         bProximo = new javax.swing.JButton();
         bAnterior = new javax.swing.JButton();
         labelComplemento = new javax.swing.JLabel();
@@ -83,10 +83,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
-        bVoltar.setText("Voltar");
-        bVoltar.addActionListener(new java.awt.event.ActionListener() {
+        bHome.setText("Home");
+        bHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bVoltarActionPerformed(evt);
+                bHomeActionPerformed(evt);
             }
         });
 
@@ -174,7 +174,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                             .addComponent(bCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bProximo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAnterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -228,7 +228,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCEP)
                     .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bVoltar))
+                    .addComponent(bHome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEstado)
@@ -310,12 +310,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
-    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+    private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new Principal().setVisible(true);
 
-    }//GEN-LAST:event_bVoltarActionPerformed
+    }//GEN-LAST:event_bHomeActionPerformed
     
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
         // TODO add your handling code here:
@@ -416,8 +416,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
             clientes.set(aux, cl);
 
             clienteControle.EscreveObjeto(escritor, clientes, true);
-            JOptionPane.showMessageDialog(null, "Editado!");
+            JOptionPane.showMessageDialog(null, "Dados Alterados!!");
         }
+        JOptionPane.showMessageDialog(null, "Acess Denied!");
     }//GEN-LAST:event_bAlterarActionPerformed
 
     /**
@@ -461,9 +462,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton bAnterior;
     private javax.swing.JButton bCadastrar;
     private javax.swing.JButton bDeletar;
+    private javax.swing.JButton bHome;
     private javax.swing.JButton bLimpar;
     private javax.swing.JButton bProximo;
-    private javax.swing.JButton bVoltar;
     private javax.swing.JTextField campoCEP;
     private javax.swing.JTextField campoCPF;
     private javax.swing.JTextField campoCidade;
