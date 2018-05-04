@@ -174,7 +174,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Cliente clienteSelecionado() {
         //seleciona o cliente pelo cpf, para acharmos o estado dele e comparar com a conc e pegar a tarifa
         ClienteController cc = new ClienteController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes.txt");
+        File dir = new File("C:\\Users\\Neusa Helena\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Cliente> clientes = cc.carregaClientes(leitor);
 
@@ -190,7 +190,7 @@ public class GerarConta extends javax.swing.JFrame {
     public Concessionaria concessionariaSelecionado() {
         //estado que tem o estado igual do cliente
         ConcessionariaController cc = new ConcessionariaController();
-        File dir = new File("C:\\Users\\NiltonGuilhen\\Documents\\GitHub\\Desktop\\Arquivos\\Conc.txt");
+        File dir = new File("C:\\Users\\Neusa Helena\\Documents\\GitHub\\Desktop\\Arquivos\\Conc.txt");
         ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
         ArrayList<Concessionaria> concessionarias = cc.carregaConcessionarias(leitor);
 
@@ -266,6 +266,44 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
+        if (diretorio == null) {
+            aux = 0;
+            contaController = new ContaController();
+            diretorio = contaController.selecionaArquivo();
+
+            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
+            contas = contaController.carregaClientes(leitor);
+
+            campoCpf.setText(contas.get(aux).);
+            campoKwh.setText(contas.get(aux).getKwh().getRua());
+            campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
+            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
+            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
+            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
+            campoPais.setText(clientes.get(aux).getEndereco().getPais());
+            campoCPF.setText(clientes.get(aux).getCpf());
+            campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
+
+        } else if (aux < clientes.size()-1) {
+            aux++;
+            clienteControle = new ClienteController();
+            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);         
+            clientes = clienteControle.carregaClientes(leitor);
+            
+            campoNome.setText(clientes.get(aux).getNome());
+            campoRua.setText(clientes.get(aux).getEndereco().getRua());
+            campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
+            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
+            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
+            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
+            campoPais.setText(clientes.get(aux).getEndereco().getPais());
+            campoCPF.setText(clientes.get(aux).getCpf());
+            campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
+
+        }
+
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
@@ -275,6 +313,7 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
 
+        limparCampos();
     }//GEN-LAST:event_bLimparActionPerformed
 
     /**
