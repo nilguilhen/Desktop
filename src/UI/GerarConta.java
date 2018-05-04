@@ -1,5 +1,11 @@
 package UI;
 
+import Controller.ClienteController;
+import Controller.ConcessionariaController;
+import Model.Cliente;
+import Model.Concessionaria;
+import java.util.ArrayList;
+
 public class GerarConta extends javax.swing.JFrame {
 
     public GerarConta() {
@@ -191,9 +197,33 @@ public class GerarConta extends javax.swing.JFrame {
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
-
+        float resultado;
+        Concessionaria c = new Concessionaria();
+        c = selecionado();
+        resultado = (c.getTarifa() * Float.parseFloat(campoKwh.getText()));
+        campoValor.setText(String.valueOf(resultado));
+        
     }//GEN-LAST:event_bLimparActionPerformed
 
+    public Concessionaria selecionado(){
+        
+         ArrayList<Cliente> arrayCliente = new ArrayList(); 
+         ArrayList<Concessionaria> arrayConce = new ArrayList();
+         ClienteController cc = new ClienteController();
+         ConcessionariaController cl = new ConcessionariaController();
+         
+         arrayCliente = cc.getArray();
+         arrayConce = cl.getArray();
+         
+         
+         Concessionaria selecionado = null;
+        for (int i=0; i<arrayCliente.size(); i++){
+            if (arrayCliente.get(i).getEndereco().getEstado().equals(arrayConce.get(i).getEndereco().getEstado())){
+                selecionado = arrayConce.get(i);
+            }
+        }
+        return selecionado;
+    }
     /**
      * @param args the command line arguments
      */
