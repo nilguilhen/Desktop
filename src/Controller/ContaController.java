@@ -4,28 +4,25 @@ import Model.Cliente;
 import Model.Concessionaria;
 import Model.ContaEnergia;
 import UI.CadastrarCliente;
-import java.util.HashSet;
-import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ContaController {
 
-    private Set<ContaEnergia> contaDB;
     ClienteController cc = new ClienteController();
     Concessionaria con = new Concessionaria();
     Cliente cli = new Cliente();
 
     public ContaController() {
 
-        this.contaDB = new HashSet<>();
     }
 
     public void create(ContaEnergia contaEnergia) throws Exception {
-        contaDB.add(contaEnergia);
+        
     }
 
-    public float geraConta(String cpf, Float kwh) throws Exception {
+/*    public float geraConta(String cpf, Float kwh) throws Exception {}
 
         float resultado = 0;
         try {
@@ -37,4 +34,6 @@ public class ContaController {
         }
         return resultado;
     }
+*/
+    
 }
