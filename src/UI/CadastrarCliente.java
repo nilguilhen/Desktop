@@ -303,7 +303,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             limparCampos();
 
         } else {
-            diretorio = clienteControle.selecionaArquivo();
+            //diretorio = clienteControle.selecionaArquivo();
             ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false);
 
             Cliente c = new Cliente();
