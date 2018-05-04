@@ -1,8 +1,10 @@
 package Model;
 
-public class ContaEnergia {
+import java.io.Serializable;
 
+public class ContaEnergia implements Serializable {
 
+    private String cpf;
     private float kwh;
     private float valor;
 
@@ -22,5 +24,12 @@ public class ContaEnergia {
         this.valor = valor;
     }
     
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     
 }
