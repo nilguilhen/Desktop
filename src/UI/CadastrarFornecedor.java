@@ -1,6 +1,5 @@
 package UI;
 
-import Controller.ClienteController;
 import Controller.ConcessionariaController;
 import Model.Concessionaria;
 import java.io.File;
@@ -109,8 +108,18 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         });
 
         bAlterar.setText("Alterar");
+        bAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAlterarActionPerformed(evt);
+            }
+        });
 
         bDeletar.setText("Deletar");
+        bDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDeletarActionPerformed(evt);
+            }
+        });
 
         bVoltar.setText("Home");
         bVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -386,6 +395,43 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
             }
     }//GEN-LAST:event_bAnteriorActionPerformed
+
+    private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
+
+        if (diretorio != null) {
+            concessionariaControle = new ConcessionariaController();
+            ObjectOutputStream escritor = concessionariaControle.CriaEscritorBinario(diretorio, false);
+
+            Concessionaria con = new Concessionaria();
+            con.setNome(campoNome.getText());
+            con.setCnpj(campoCNPJ.getText());
+            con.setTarifa(Integer.parseInt(campoTarifa.getText()));
+            con.setRua(campoRua.getText());
+            con.setNumero(Integer.parseInt(campoNumero.getText()));
+            con.setComplemento(campoComplemento.getText());
+            con.setCidade(campoCidade.getText());
+            con.setCep(campoCEP.getText());
+            con.setEstado(campoEstado.getText());
+            con.setPais(campoPais.getText());
+            conc.set(aux, con);
+
+            concessionariaControle.EscreveObjeto(escritor, conc, true);
+            JOptionPane.showMessageDialog(null, "Editado!");
+        }
+        
+    }//GEN-LAST:event_bAlterarActionPerformed
+
+    private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
+    
+        concessionariaControle = new ConcessionariaController();
+        ObjectOutputStream escritor = concessionariaControle.CriaEscritorBinario(diretorio, false);
+
+        conc.remove(conc.get(aux));
+        concessionariaControle.EscreveObjeto(escritor, conc, true);
+        JOptionPane.showMessageDialog(null, "Removido!");
+        limparCampos();
+        
+    }//GEN-LAST:event_bDeletarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

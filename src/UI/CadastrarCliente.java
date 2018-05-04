@@ -371,7 +371,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         clientes.remove(clientes.get(aux));
         clienteControle.EscreveObjeto(escritor, clientes, true);
         JOptionPane.showMessageDialog(null, "Removido!");
-        //limparCampos();
+        limparCampos();
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
@@ -416,7 +416,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             clientes.set(aux, cl);
 
             clienteControle.EscreveObjeto(escritor, clientes, true);
-            JOptionPane.showMessageDialog(null, "Editado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Editado!");
         }
     }//GEN-LAST:event_bAlterarActionPerformed
 
