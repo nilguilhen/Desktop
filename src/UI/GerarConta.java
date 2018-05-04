@@ -205,8 +205,11 @@ public class GerarConta extends javax.swing.JFrame {
     }
 
     public ContaEnergia pegarCampo(ContaEnergia c) {
+        Concessionaria concSelecionado = concessionariaSelecionado();        
+        c.setCpf(campoCpf.getText());
         c.setKwh(Float.parseFloat(campoKwh.getText()));
-
+        c.setValor((concSelecionado.getTarifa())*(Float.parseFloat(campoKwh.getText())));
+        
         return c;
     }
 
@@ -245,7 +248,7 @@ public class GerarConta extends javax.swing.JFrame {
             limparCampos();// limpar  todos os campos
         }
 
-        JOptionPane.showMessageDialog(null, "Deus eh mais!");
+        JOptionPane.showMessageDialog(null, "Conta gerada!");
 
 
     }//GEN-LAST:event_bCadastrarActionPerformed
@@ -266,43 +269,6 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
-        if (diretorio == null) {
-            aux = 0;
-            contaController = new ContaController();
-            diretorio = contaController.selecionaArquivo();
-
-            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
-            contas = contaController.carregaClientes(leitor);
-
-            campoCpf.setText(contas.get(aux).);
-            campoKwh.setText(contas.get(aux).getKwh().getRua());
-            campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
-            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
-            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
-            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
-            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
-            campoPais.setText(clientes.get(aux).getEndereco().getPais());
-            campoCPF.setText(clientes.get(aux).getCpf());
-            campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
-
-        } else if (aux < clientes.size()-1) {
-            aux++;
-            clienteControle = new ClienteController();
-            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);         
-            clientes = clienteControle.carregaClientes(leitor);
-            
-            campoNome.setText(clientes.get(aux).getNome());
-            campoRua.setText(clientes.get(aux).getEndereco().getRua());
-            campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
-            campoComplemento.setText(clientes.get(aux).getEndereco().getComplemento());
-            campoCidade.setText(clientes.get(aux).getEndereco().getCidade());
-            campoCEP.setText(clientes.get(aux).getEndereco().getCep());
-            campoEstado.setText(clientes.get(aux).getEndereco().getEstado());
-            campoPais.setText(clientes.get(aux).getEndereco().getPais());
-            campoCPF.setText(clientes.get(aux).getCpf());
-            campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
-
-        }
 
     }//GEN-LAST:event_bProximoActionPerformed
 
