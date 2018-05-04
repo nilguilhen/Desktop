@@ -1,6 +1,7 @@
 package Model;
+import java.io.Serializable;
 
-public class Concessionaria {
+public class Concessionaria implements Serializable {
 
     Endereco endereco = new Endereco();
     

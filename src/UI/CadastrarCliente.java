@@ -323,7 +323,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bLimparActionPerformed
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
-        // TODO add your handling code here
         if (diretorio == null) {
             aux = 0;
             clienteControle = new ClienteController();
@@ -346,8 +345,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } else if (aux < clientes.size()-1) {
             aux++;
             clienteControle = new ClienteController();
-            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
+            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);         
             clientes = clienteControle.carregaClientes(leitor);
+            
             campoNome.setText(clientes.get(aux).getNome());
             campoRua.setText(clientes.get(aux).getEndereco().getRua());
             campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));

@@ -1,14 +1,21 @@
 package UI;
 
+import Controller.ClienteController;
 import Controller.ConcessionariaController;
 import Model.Concessionaria;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private ConcessionariaController concessionariaControle;
+    private int aux = -1;
+    File diretorio = null;
+    private ArrayList<Concessionaria> conc = new ArrayList();
+    
     
     public CadastrarFornecedor() {
         initComponents();
@@ -120,6 +127,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         });
 
         bAnterior.setText("Anterior");
+        bAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAnteriorActionPerformed(evt);
+            }
+        });
 
         labelTittle.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,7 +265,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         campoRua.setText("");
     }
         
-    public void pegarCampo(Concessionaria c) {
+    public Concessionaria pegarCampo(Concessionaria c) {
         c.setNome(campoNome.getText());
         c.setCnpj(campoCNPJ.getText());
         c.setTarifa(Integer.parseInt(campoTarifa.getText()));
@@ -264,6 +276,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         c.setCep(campoCEP.getText());
         c.setEstado(campoEstado.getText());
         c.setPais(campoPais.getText());
+        
+        return c;
     }
     
     
@@ -277,31 +291,31 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bLimparActionPerformed
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-        // TODO add your handling code here:
-        Concessionaria c = new Concessionaria();
+       aux++;
+        //cadastrar a conc no controlador de conc
 
-        //setar todos os atributos do cliente
-        try {
-            pegarCampo(c);
+        if (diretorio == null) {
+            concessionariaControle = new ConcessionariaController();
+            diretorio = concessionariaControle.selecionaArquivo();
+            ObjectOutputStream escritaBinario = concessionariaControle.CriaEscritorBinario(diretorio, false);
 
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        //cadastrar o cliente no controlador de cliente
-        try {
-            concessionariaControle.create(c);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        // limpar  todos os campos
-        try {
+            Concessionaria c = new Concessionaria();
+            c = pegarCampo(c);//setar todos os atributos
+            concessionariaControle.setArray(c);
+            concessionariaControle.EscreveObjeto(escritaBinario, concessionariaControle.getArray(), true);
             limparCampos();
 
-        } catch (Exception ex) {
-            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            //diretorio = concessionariaControle.selecionaArquivo();
+            ObjectOutputStream escritaBinario = concessionariaControle.CriaEscritorBinario(diretorio, false);
+
+            Concessionaria c = new Concessionaria();
+            c = pegarCampo(c);//setar todos os atributos
+            concessionariaControle.EscreveObjeto(escritaBinario, concessionariaControle.getArray(), true);
+            limparCampos();
         }
+
+        JOptionPane.showMessageDialog(null, "Concessionaria cadastrada!");
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -311,10 +325,67 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
-        // TODO add your handling code here:
-        concessionariaControle.readAll();
+        if (diretorio == null) {
+            aux = 0;
+            concessionariaControle = new ConcessionariaController();
+            diretorio = concessionariaControle.selecionaArquivo();
+
+            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
+            conc = concessionariaControle.carregaConcessionarias(leitor);
+
+            campoNome.setText(conc.get(aux).getNome());
+            campoRua.setText(conc.get(aux).getEndereco().getRua());
+            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
+            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
+            campoCEP.setText(conc.get(aux).getEndereco().getCep());
+            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
+            campoPais.setText(conc.get(aux).getEndereco().getPais());
+            campoCNPJ.setText(conc.get(aux).getCnpj());
+            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
+
+        } else if (aux < conc.size() - 1) {
+            aux++;
+            concessionariaControle = new ConcessionariaController();
+            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
+            conc = concessionariaControle.carregaConcessionarias(leitor);
+
+            campoNome.setText(conc.get(aux).getNome());
+            campoRua.setText(conc.get(aux).getEndereco().getRua());
+            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
+            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
+            campoCEP.setText(conc.get(aux).getEndereco().getCep());
+            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
+            campoPais.setText(conc.get(aux).getEndereco().getPais());
+            campoCNPJ.setText(conc.get(aux).getCnpj());
+            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
+
+        }
 
     }//GEN-LAST:event_bProximoActionPerformed
+
+    private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
+
+            if (diretorio != null && aux != 0) {
+            aux--;
+            concessionariaControle = new ConcessionariaController();
+            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
+            conc = concessionariaControle.carregaConcessionarias(leitor);
+
+            campoNome.setText(conc.get(aux).getNome());
+            campoRua.setText(conc.get(aux).getEndereco().getRua());
+            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
+            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
+            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
+            campoCEP.setText(conc.get(aux).getEndereco().getCep());
+            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
+            campoPais.setText(conc.get(aux).getEndereco().getPais());
+            campoCNPJ.setText(conc.get(aux).getCnpj());
+            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
+
+            }
+    }//GEN-LAST:event_bAnteriorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
