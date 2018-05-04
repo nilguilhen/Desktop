@@ -32,6 +32,7 @@ public class GerarConta extends javax.swing.JFrame {
         labelInformarKWH = new javax.swing.JLabel();
         campocontaCPF = new javax.swing.JTextField();
         campocontaKWH = new javax.swing.JTextField();
+<<<<<<< HEAD
         bCadastrar = new javax.swing.JButton();
         bAlterar = new javax.swing.JButton();
         bDeletar = new javax.swing.JButton();
@@ -44,6 +45,10 @@ public class GerarConta extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         jButton1.setText("jButton1");
+=======
+        bGerar = new javax.swing.JButton();
+        bHome = new javax.swing.JButton();
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,10 +68,17 @@ public class GerarConta extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         bAlterar.setText("Alterar");
         bAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAlterarActionPerformed(evt);
+=======
+        bHome.setText("Home");
+        bHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHomeActionPerformed(evt);
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
             }
         });
 
@@ -116,6 +128,7 @@ public class GerarConta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
@@ -147,11 +160,29 @@ public class GerarConta extends javax.swing.JFrame {
                 .addGap(0, 30, Short.MAX_VALUE)
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
+=======
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelInformarKWH)
+                    .addComponent(labelInformarCPF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTitulo)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bGerar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bHome))
+                        .addComponent(campocontaKWH, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                        .addComponent(campocontaCPF, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(116, Short.MAX_VALUE))
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelTitulo)
@@ -188,11 +219,28 @@ public class GerarConta extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+=======
+                .addComponent(labelTitulo)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelInformarCPF)
+                    .addComponent(campocontaCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelInformarKWH)
+                    .addComponent(campocontaKWH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bGerar)
+                    .addComponent(bHome))
+                .addContainerGap(67, Short.MAX_VALUE))
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
         );
 
         setBounds(0, 0, 523, 383);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
       
     }//GEN-LAST:event_bCadastrarActionPerformed
@@ -207,10 +255,17 @@ public class GerarConta extends javax.swing.JFrame {
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+=======
+    private void bHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHomeActionPerformed
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
         // TODO add your handling code here:
         this.setVisible(false);
         new Principal().setVisible(true);
+<<<<<<< HEAD
     }//GEN-LAST:event_bVoltarActionPerformed
+=======
+    }//GEN-LAST:event_bHomeActionPerformed
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
     
@@ -226,6 +281,7 @@ public class GerarConta extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton bAlterar;
     private javax.swing.JButton bAnterior;
     private javax.swing.JButton bCadastrar;
@@ -234,6 +290,10 @@ public class GerarConta extends javax.swing.JFrame {
     private javax.swing.JButton bProximo;
     private javax.swing.JButton bVoltar;
     private javax.swing.JTextField campoValor;
+=======
+    private javax.swing.JButton bGerar;
+    private javax.swing.JButton bHome;
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
     private javax.swing.JTextField campocontaCPF;
     private javax.swing.JTextField campocontaKWH;
     private javax.swing.JButton jButton1;

@@ -35,6 +35,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+<<<<<<< HEAD
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
@@ -54,6 +55,21 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
                           <Component id="campoValor" pref="198" max="32767" attributes="0"/>
+=======
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelInformarKWH" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelInformarCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="bGerar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="bHome" min="-2" max="-2" attributes="0"/>
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
                       </Group>
                   </Group>
               </Group>
@@ -82,6 +98,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
@@ -122,6 +139,23 @@
                           </Group>
                       </Group>
                   </Group>
+=======
+              <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelInformarCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campocontaCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelInformarKWH" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campocontaKWH" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bGerar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bHome" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="jTextArea1" min="-2" pref="61" max="-2" attributes="0"/>
@@ -199,12 +233,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bProximoActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="bAnterior">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anterior"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAnteriorActionPerformed"/>
+=======
+    <Component class="javax.swing.JButton" name="bHome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Home"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bHomeActionPerformed"/>
+>>>>>>> 8f405771ccdd6e3989b204c445dc92442f5a66bb
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bLimpar">
