@@ -16,6 +16,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private int aux = -1;
 
     public CadastrarCliente() {
+        clienteControle = new ClienteController();
         initComponents();
     }
 
@@ -285,7 +286,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         //cadastrar o cliente no controlador de cliente
 
         if (diretorio == null) {
-            clienteControle = new ClienteController();
             diretorio = clienteControle.selecionaArquivo();
             ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false);
 
@@ -298,7 +298,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } else {
             //diretorio = clienteControle.selecionaArquivo();
             ObjectOutputStream escritaBinario = clienteControle.CriaEscritorBinario(diretorio, false);
-
             Cliente c = new Cliente();
             c = pegarCampo(c);//setar todos os atributos do cliente
             clienteControle.setArray(c);
@@ -316,7 +315,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         new Principal().setVisible(true);
 
     }//GEN-LAST:event_bHomeActionPerformed
-    
+
     private void bLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimparActionPerformed
         // TODO add your handling code here:
         limparCampos();
@@ -325,7 +324,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
         if (diretorio == null) {
             aux = 0;
-            clienteControle = new ClienteController();
             diretorio = clienteControle.selecionaArquivo();
 
             ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
@@ -342,12 +340,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
             campoCPF.setText(clientes.get(aux).getCpf());
             campoIdade.setText(String.valueOf(clientes.get(aux).getIdade()));
 
-        } else if (aux < clientes.size()-1) {
+        } else if (aux < clientes.size() - 1) {
             aux++;
-            clienteControle = new ClienteController();
-            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);         
+            ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
             clientes = clienteControle.carregaClientes(leitor);
-            
+
             campoNome.setText(clientes.get(aux).getNome());
             campoRua.setText(clientes.get(aux).getEndereco().getRua());
             campoNumero.setText(String.valueOf(clientes.get(aux).getEndereco().getNumero()));
@@ -365,7 +362,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
-        clienteControle = new ClienteController();
         ObjectOutputStream escritor = clienteControle.CriaEscritorBinario(diretorio, false);
 
         clientes.remove(clientes.get(aux));
@@ -378,7 +374,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (diretorio != null && aux != 0) {
             aux--;
-            clienteControle = new ClienteController();
             ObjectInputStream leitor = clienteControle.CriaLeitorBinario(diretorio);
             clientes = clienteControle.carregaClientes(leitor);
             campoNome.setText(clientes.get(aux).getNome());
@@ -399,7 +394,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (diretorio != null) {
-            clienteControle = new ClienteController();
             ObjectOutputStream escritor = clienteControle.CriaEscritorBinario(diretorio, false);
 
             Cliente cl = new Cliente();
