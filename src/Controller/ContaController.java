@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Cliente;
+import Model.ContaEnergia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,14 +11,15 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+public class ContaController {
 
-public class ClienteController {
     File arquivo = null;
-    private ArrayList<Cliente> clienteDB = new ArrayList();
+    private ArrayList<ContaEnergia> contaDB = new ArrayList();
 
-    public ClienteController() {}
-    
-    public ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
+    public ContaController() {
+    }
+
+     public ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream(arquivo, append));
@@ -83,30 +84,18 @@ public class ClienteController {
     return arquivo;    
     }    
     
-    public void setArray(Cliente c){
-        clienteDB.add(c);
+    public void setArray(ContaEnergia c){
+        contaDB.add(c);
     }
-    public ArrayList<Cliente> getArray(){
-        return clienteDB;
+    public ArrayList<ContaEnergia> getArray(){
+        return contaDB;
     }
     
-    public ArrayList<Cliente> carregaClientes(ObjectInputStream leitor){
-        clienteDB = (ArrayList<Cliente>) LeObjeto(leitor);
+    public ArrayList<ContaEnergia> carregaContas(ObjectInputStream leitor){
+        contaDB = (ArrayList<ContaEnergia>) LeObjeto(leitor);
 
-        return clienteDB;
+        return contaDB;
     }
+
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
