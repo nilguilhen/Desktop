@@ -121,7 +121,8 @@ public class ConexaoBD {
                 rs2 = stmt2.executeQuery(SQL2);
 
                 conn.close();
-                return rs;            } catch (SQLException Erro) {
+                return rs;            
+            } catch (SQLException Erro) {
                 System.out.println("Erro na execução da Querry = " + Erro);
             }
         }
