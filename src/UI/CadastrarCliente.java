@@ -266,17 +266,22 @@ public class CadastrarCliente extends javax.swing.JFrame {
         campoRua.setText("");
     }
 
-    public Cliente pegarCampo(Cliente c) {
+    public Cliente pegarCampo() {
+        Cliente c = new Cliente();
+        
         c.setNome(campoNome.getText());
         c.setCpf(campoCPF.getText());
         c.setIdade(Integer.parseInt(campoIdade.getText()));
+        
+        c.setPais(campoPais.getText());
+        c.setEstado(campoEstado.getText());
+        c.setCidade(campoCidade.getText());
         c.setRua(campoRua.getText());
         c.setNumero(Integer.parseInt(campoNumero.getText()));
         c.setComplemento(campoComplemento.getText());
-        c.setCidade(campoCidade.getText());
         c.setCep(campoCEP.getText());
-        c.setEstado(campoEstado.getText());
-        c.setPais(campoPais.getText());
+        
+        
 
         return c;
     }
@@ -288,7 +293,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
             campoCPF.setText(rs.getString("Cli_CPF"));
             campoIdade.setText(rs.getString("Cli_Idade"));
 
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
     }    
@@ -296,7 +301,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
        
-       rsdados = banco.consultaCliente();
+       
+        cli = pegarCampo();
+        banco.cadastroCliente(cli);
+        
+        rsdados = banco.consultaCliente();
         
         try {
             if (rsdados != null) {
@@ -307,7 +316,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
 

@@ -263,16 +263,18 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void limparCampos() {
-        campoCEP.setText("");
-        campoCNPJ.setText("");
-        campoCidade.setText("");
-        campoComplemento.setText("");
-        campoEstado.setText("");
-        campoTarifa.setText("");
         campoNome.setText("");
-        campoNumero.setText("");
+        campoCNPJ.setText("");
+        campoTarifa.setText("");
+        
         campoPais.setText("");
+        campoEstado.setText("");
+        campoCidade.setText("");
         campoRua.setText("");
+        campoNumero.setText("");
+        campoComplemento.setText("");
+        campoCEP.setText("");
+  
     }
 
     public Concessionaria pegarCampo() {
@@ -280,13 +282,16 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         c.setNome(campoNome.getText());
         c.setCnpj(campoCNPJ.getText());
         c.setTarifa(Integer.parseInt(campoTarifa.getText()));
+        
+        c.setPais(campoPais.getText());
+        c.setEstado(campoEstado.getText());
+        c.setCidade(campoCidade.getText());
         c.setRua(campoRua.getText());
         c.setNumero(Integer.parseInt(campoNumero.getText()));
-        c.setComplemento(campoComplemento.getText());
-        c.setCidade(campoCidade.getText());
+        c.setComplemento(campoComplemento.getText());     
         c.setCep(campoCEP.getText());
-        c.setEstado(campoEstado.getText());
-        c.setPais(campoPais.getText());
+        
+        
 
         return c;
     }
@@ -295,11 +300,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         public void ExibeRegistro(ResultSet rs) {
         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
-            campoNome.setText(rs.getString("conc_nome"));
-            campoCNPJ.setText(rs.getString("conc_cnpj"));
-            campoTarifa.setText(rs.getString("conc_tarifa"));
+            campoNome.setText(rs.getString("Conc_Nome"));
+            campoCNPJ.setText(rs.getString("Conc_CNPJ"));
+            campoTarifa.setText(rs.getString("Conc_Tarifa"));
 
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
     }    
@@ -315,7 +320,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         
-        cc = new Concessionaria();
+        cc = pegarCampo();
         banco.cadastroConce(cc);
         
         rsdados = banco.consultaConce();
@@ -329,7 +334,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "O ultimo registro ja esta selecionado.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
         JOptionPane.showMessageDialog(null, "Concessionaria cadastrada!");
@@ -352,7 +357,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
         
@@ -370,7 +375,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
         

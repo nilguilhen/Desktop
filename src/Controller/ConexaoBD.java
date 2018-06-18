@@ -94,10 +94,10 @@ public class ConexaoBD {
                 pstmt2.setString(7, String.valueOf(cliente.getEndereco().getNumero()));
                 pstmt2.setString(8, cliente.getEndereco().getComplemento());
                 pstmt2.setString(9, cliente.getEndereco().getCep());
-
                 pstmt2.executeUpdate();
 
                 conn.commit();
+                
                 conn.close();
             } catch (SQLException Erro) {
                 System.out.println("Erro" + Erro);
@@ -184,7 +184,7 @@ public class ConexaoBD {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Concessionaria";
-                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Cliente c Where e.Conc_CNPJ = c.Conc_CNPJ";
+                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Concessionaria c Where e.Conc_CNPJ = c.Conc_CNPJ";
            
 
                 stmt = conn.createStatement(tipo, concorrencia);
