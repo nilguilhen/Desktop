@@ -109,7 +109,7 @@ public class ConexaoBD {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Cliente";
-                String SQL2 = "SELECT Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Nume,End_Complemento,End_CEP FROM Endereco";
+                String SQL2 = "SELECT * FROM Endereco";
 
                 stmt = conn.createStatement(tipo, concorrencia);
                 stmt2 = conn.createStatement(tipo, concorrencia);
@@ -184,7 +184,9 @@ public class ConexaoBD {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Concessionaria";
-                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Nume,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Concessionaria c Where e.Conc_CNPJ = c.Conc_CNPJ";
+                String SQL2 = "SELECT * "
+                                + "FROM  Endereco e, Concessionaria c "
+                                + "Where e.Conc_CNPJ = c.Conc_CNPJ";
            
 
                 stmt = conn.createStatement(tipo, concorrencia);

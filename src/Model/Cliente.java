@@ -7,7 +7,7 @@ public class Cliente implements Serializable {
 
     private String nome;
     private String cpf;
-    private int idade;
+    private String idade;
 
     public String getNome() {
         return nome;
@@ -25,11 +25,11 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
         endereco.setRua(rua);
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         endereco.setNumero(numero);
     }
 

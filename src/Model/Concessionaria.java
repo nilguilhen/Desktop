@@ -45,7 +45,7 @@ public class Concessionaria implements Serializable {
         endereco.setRua(rua);
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         endereco.setNumero(numero);
     }
 

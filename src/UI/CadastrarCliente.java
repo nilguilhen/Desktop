@@ -271,13 +271,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
         c.setNome(campoNome.getText());
         c.setCpf(campoCPF.getText());
-        c.setIdade(Integer.parseInt(campoIdade.getText()));
+        c.setIdade(campoIdade.getText());
         
         c.setPais(campoPais.getText());
         c.setEstado(campoEstado.getText());
         c.setCidade(campoCidade.getText());
         c.setRua(campoRua.getText());
-        c.setNumero(Integer.parseInt(campoNumero.getText()));
+        c.setNumero(campoNumero.getText());
         c.setComplemento(campoComplemento.getText());
         c.setCep(campoCEP.getText());
         
@@ -289,7 +289,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     public void ExibeRegistro(ResultSet rs) {
         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
-            campoNome.setText(String.valueOf(rs.getString("Cli_Nome")));
+            campoNome.setText(rs.getString("Cli_Nome"));
             campoCPF.setText(rs.getString("Cli_CPF"));
             campoIdade.setText(rs.getString("Cli_Idade"));
 
@@ -347,7 +347,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
 
@@ -377,7 +377,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
             }
-        } catch (Exception erro) {
+        } catch (SQLException erro) {
             System.out.println(erro);
         }
         

@@ -287,7 +287,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         c.setEstado(campoEstado.getText());
         c.setCidade(campoCidade.getText());
         c.setRua(campoRua.getText());
-        c.setNumero(Integer.parseInt(campoNumero.getText()));
+        c.setNumero(campoNumero.getText());
         c.setComplemento(campoComplemento.getText());     
         c.setCep(campoCEP.getText());
         
