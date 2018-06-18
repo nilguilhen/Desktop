@@ -315,21 +315,23 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
         
-        rsdados = banco.consultaCliente();
+        cc = new Concessionaria();
+        banco.cadastroConce(cc);
         
-        try {
+        rsdados = banco.consultaConce();
+        
+         try {
             if (rsdados != null) {
-                if (!rsdados.isFirst()) {
-                    rsdados.first();
+                if (!rsdados.isLast()) {
+                    rsdados.last();
                     ExibeRegistro(rsdados);
                 } else {
-                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
+                    JOptionPane.showMessageDialog(this, "O ultimo registro ja esta selecionado.");
                 }
             }
         } catch (Exception erro) {
             System.out.println(erro);
         }
-
         JOptionPane.showMessageDialog(null, "Concessionaria cadastrada!");
     }//GEN-LAST:event_bCadastrarActionPerformed
 
