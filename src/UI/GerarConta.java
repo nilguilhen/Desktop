@@ -12,12 +12,9 @@ import javax.swing.JOptionPane;
 public class GerarConta extends javax.swing.JFrame {
 
     private int aux = -1;
-    private ContaController contaController = null;
     private ArrayList<ContaEnergia> contas = new ArrayList();
-    private File diretorio = null;
 
     public GerarConta() {
-        contaController = new ContaController();
         initComponents();
     }
 
