@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Model.Cliente;
 import Model.Concessionaria;
-import Model.ContaEnergia;
-import Model.Endereco;
 
 /**
  *
@@ -186,7 +184,7 @@ public class ConexaoBD {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Concessionaria";
-                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Concessionaria c Where e.Conc_CNPJ = c.Conc_CNPJ";
+                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Cliente c Where e.Conc_CNPJ = c.Conc_CNPJ";
            
 
                 stmt = conn.createStatement(tipo, concorrencia);
@@ -202,6 +200,21 @@ public class ConexaoBD {
             }
         }
         return null;
+    }
+        
+            public void excluiConce(String CNPJ) {
+        try {
+            String SQL = "DELETE FROM Concessionaria WHERE Conc_CNPJ = (?)";
+            
+            stmt = conn.prepareStatement(SQL, tipo, concorrencia);
+
+            pstmt.setInt(1, Integer.parseInt(CNPJ));
+            pstmt.executeUpdate();
+            conn.commit();
+
+        } catch (SQLException Erro) {
+            System.out.println("Erro ao Deletar = " + Erro);
+        }
     }
 
 }
