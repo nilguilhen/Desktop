@@ -17,6 +17,23 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     public CadastrarCliente() {
         initComponents();
+        rsdadoscliente = banco.consultaCliente();
+        rsdadosEndereco = banco.consultaEndereco();
+        try {
+            if (rsdadoscliente != null && rsdadosEndereco != null) {
+                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
+                    rsdadoscliente.first();
+                    rsdadosEndereco.first();
+                    ExibeRegistroCliente(rsdadoscliente);
+                    ExibeRegistroEndereco(rsdadosEndereco);
+                } else {
+                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+
     }
 
     /**
@@ -319,20 +336,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         banco.cadastroCliente(cli);
 
-        /*try {
-            if (rsdadoscliente != null && rsdadosEndereco != null) {
-                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
-                    rsdadoscliente.first();
-                    rsdadosEndereco.first();
-                    ExibeRegistroCliente(rsdadoscliente);
-                    ExibeRegistroEndereco(rsdadosEndereco);
-                } else {
-                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
-                }
-            }
-        } catch (SQLException erro) {
-            System.out.println(erro);
-        }*/
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 

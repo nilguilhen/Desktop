@@ -86,7 +86,7 @@ public class ConexaoBD {
                 conn.commit();
 
                 pstmt2.setString(1, cliente.getCpf());
-                //pstmt2.setString(2, "");
+                pstmt2.setString(2, "");
                 pstmt2.setString(3, cliente.getEndereco().getPais());
                 pstmt2.setString(4, cliente.getEndereco().getEstado());
                 pstmt2.setString(5, cliente.getEndereco().getCidade());
