@@ -18,7 +18,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     public CadastrarCliente() {
         initComponents();
         rsdadoscliente = banco.consultaCliente();
-        rsdadosEndereco = banco.consultaEndereco();
+        rsdadosEndereco = banco.consultaClienteEndereco();
         try {
             if (rsdadoscliente != null && rsdadosEndereco != null) {
                 if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
@@ -354,10 +354,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
         rsdadoscliente = banco.consultaCliente();
-        rsdadosEndereco = banco.consultaEndereco();
+        rsdadosEndereco = banco.consultaClienteEndereco();
         try {
             if (rsdadoscliente != null && rsdadosEndereco != null) {
-                if (!rsdadoscliente.isLast() && !rsdadosEndereco.isLast()) {
+                if ((!rsdadoscliente.isLast()) && (!rsdadosEndereco.isLast())) {
                     rsdadoscliente.next();
                     rsdadosEndereco.next();
                     ExibeRegistroCliente(rsdadoscliente);
@@ -374,7 +374,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
 
+        rsdadoscliente = banco.consultaCliente();
+        //rsdadosEndereco = banco.consultaEndereco();
+        
         try {
+            //banco.excluiEnderecoCliente(rsdadosEndereco.getString("Cli_CPF"));
             banco.excluiCliente(rsdadoscliente.getString("Cli_CPF"));
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);

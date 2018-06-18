@@ -13,12 +13,31 @@ import javax.swing.JOptionPane;
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
     ConexaoBD banco = new ConexaoBD();
-    ResultSet rsdados;
+    ResultSet rsdadosconce;
+    ResultSet rsdadosendereco;
     Concessionaria cc;
     
 
     public CadastrarFornecedor() {
         initComponents();
+        rsdadosconce = banco.consultaConce();
+        rsdadosendereco = banco.consultaConceEndereco();
+        
+        try {
+            if (rsdadosconce != null && rsdadosendereco != null) {
+                if (!rsdadosconce.isFirst() && !rsdadosendereco.isFirst()) {
+                    rsdadosconce.first();
+                    rsdadosendereco.first();
+                    ExibeRegistroConce(rsdadosconce);
+                    ExibeRegistroEndereco(rsdadosconce);
+                } else {
+                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+
     }
 
     /**
@@ -281,7 +300,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         Concessionaria c = new Concessionaria();
         c.setNome(campoNome.getText());
         c.setCnpj(campoCNPJ.getText());
-        c.setTarifa(Integer.parseInt(campoTarifa.getText()));
+        c.setTarifa(campoTarifa.getText());
         
         c.setPais(campoPais.getText());
         c.setEstado(campoEstado.getText());
@@ -297,7 +316,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }
 
     
-        public void ExibeRegistro(ResultSet rs) {
+        public void ExibeRegistroConce(ResultSet rs) {
         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
             campoNome.setText(rs.getString("Conc_Nome"));
@@ -307,7 +326,23 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         } catch (SQLException erro) {
             System.out.println(erro);
         }
-    }    
+    }  
+        
+     public void ExibeRegistroEndereco(ResultSet rs2) {
+        try {
+            //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
+            campoPais.setText(rs2.getString("End_Pais"));
+            campoEstado.setText(rs2.getString("End_Estado"));
+            campoCidade.setText(rs2.getString("End_Cidade"));
+            campoRua.setText(rs2.getString("End_Rua"));
+            campoNumero.setText(rs2.getString("End_Nume"));
+            campoComplemento.setText(rs2.getString("End_Complemento"));
+            campoCEP.setText(rs2.getString("End_CEP"));
+
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+    }
 
     private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
         // TODO add your handling code here:
@@ -323,7 +358,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         cc = pegarCampo();
         banco.cadastroConce(cc);
         
-        rsdados = banco.consultaConce();
+        /*rsdados = banco.consultaConce();
         
          try {
             if (rsdados != null) {
@@ -336,7 +371,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         } catch (SQLException erro) {
             System.out.println(erro);
-        }
+        }*/
         JOptionPane.showMessageDialog(null, "Concessionaria cadastrada!");
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -349,10 +384,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
       
         try {
-            if (rsdados != null) {
-                if (!rsdados.isLast()) {
-                    rsdados.next();
-                    ExibeRegistro(rsdados);
+            if (rsdadosconce != null && rsdadosendereco != null) {
+                if (!rsdadosconce.isLast() && !rsdadosendereco.isLast()) {
+                    rsdadosconce.next();
+                    rsdadosendereco.next();
+                    ExibeRegistroConce(rsdadosconce);
+                    ExibeRegistroEndereco(rsdadosendereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
@@ -364,13 +401,13 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
-
-        
         try {
-            if (rsdados != null) {
-                if (!rsdados.isFirst()) {
-                    rsdados.previous();
-                    ExibeRegistro(rsdados);
+            if (rsdadosconce != null && rsdadosendereco != null) {
+                if (!rsdadosconce.isFirst() && !rsdadosendereco.isFirst()) {
+                    rsdadosconce.previous();
+                    rsdadosendereco.previous();
+                    ExibeRegistroConce(rsdadosconce);
+                    ExibeRegistroEndereco(rsdadosendereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
@@ -378,7 +415,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         } catch (SQLException erro) {
             System.out.println(erro);
         }
-        
         
     }//GEN-LAST:event_bAnteriorActionPerformed
 
@@ -391,7 +427,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         
         try {
-            banco.excluiConce(rsdados.getString("conc_cnpj"));
+            banco.excluiConce(rsdadosconce.getString("conc_cnpj"));
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -91,13 +91,13 @@ public class ConexaoBD {
                 pstmt2.setString(4, cliente.getEndereco().getEstado());
                 pstmt2.setString(5, cliente.getEndereco().getCidade());
                 pstmt2.setString(6, cliente.getEndereco().getRua());
-                pstmt2.setString(7, String.valueOf(cliente.getEndereco().getNumero()));
+                pstmt2.setString(7, cliente.getEndereco().getNumero());
                 pstmt2.setString(8, cliente.getEndereco().getComplemento());
                 pstmt2.setString(9, cliente.getEndereco().getCep());
                 pstmt2.executeUpdate();
 
                 conn.commit();
-                
+
                 conn.close();
             } catch (SQLException Erro) {
                 System.out.println("Erro" + Erro);
@@ -122,10 +122,11 @@ public class ConexaoBD {
         }
         return null;
     }
-        public ResultSet consultaEndereco() {
+
+    public ResultSet consultaClienteEndereco() {
         if (conectaBD()) {
             try {
-                String SQL2 = "SELECT * FROM Endereco e, Cliente cl WHERE cl.Cli_CPF = e.Cli_CPF";
+                String SQL2 = "SELECT * FROM Endereco e, Cliente cl WHERE e.Cli_CPF = cl.Cli_CPF";
 
                 stmt2 = conn.createStatement(tipo, concorrencia);
 
@@ -143,23 +144,37 @@ public class ConexaoBD {
     public void excluiCliente(String CPF) {
         try {
             String SQL = "DELETE FROM Cliente WHERE Cli_CPF = (?)";
-            
-            stmt = conn.prepareStatement(SQL, tipo, concorrencia);
 
-            pstmt.setInt(1, Integer.parseInt(CPF));
+            stmt = conn.prepareStatement(SQL, tipo, concorrencia);
+            pstmt.setString(1, CPF);
             pstmt.executeUpdate();
             conn.commit();
+            conn.close();
+        } catch (SQLException Erro) {
+            System.out.println("Erro ao Deletar = " + Erro);
+        }
+    }
+
+    public void excluiEnderecoCliente(String CPF) {
+        try {
+            String SQL2 = "DELETE FROM Endereco WHERE Cli_CPF = (?)";
+
+            stmt = conn.prepareStatement(SQL2, tipo, concorrencia);
+            pstmt.setString(1, CPF);
+            pstmt.executeUpdate();
+            conn.commit();
+            conn.close();
 
         } catch (SQLException Erro) {
             System.out.println("Erro ao Deletar = " + Erro);
         }
     }
-    
+
     public void cadastroConce(Concessionaria conce) {
 
         if (conectaBD()) {
             try {
-                String SQL = "INSERT INTO (Concessionaria Conc_Nome, Conc_CNPJ, Conc_Tarifa) VALUES (?,?,?)";
+                String SQL = "INSERT INTO Concessionaria (Conc_Nome, Conc_CNPJ, Conc_Tarifa) VALUES (?,?,?)";
                 String SQL2 = "INSERT INTO Endereco (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,"
                         + "End_Rua,End_Nume,End_Complemento,End_CEP)"
                         + "VALUES (?,?,?,?,?,?,?,?,?)";
@@ -169,7 +184,7 @@ public class ConexaoBD {
 
                 pstmt.setString(1, conce.getNome());
                 pstmt.setString(2, conce.getCnpj());
-                pstmt.setString(3, String.valueOf(conce.getTarifa()));
+                pstmt.setString(3, conce.getTarifa());
                 pstmt.executeUpdate();
                 conn.commit();
 
@@ -179,7 +194,7 @@ public class ConexaoBD {
                 pstmt2.setString(4, conce.getEndereco().getEstado());
                 pstmt2.setString(5, conce.getEndereco().getCidade());
                 pstmt2.setString(6, conce.getEndereco().getRua());
-                pstmt2.setString(7, String.valueOf(conce.getEndereco().getNumero()));
+                pstmt2.setString(7, conce.getEndereco().getNumero());
                 pstmt2.setString(8, conce.getEndereco().getComplemento());
                 pstmt2.setString(9, conce.getEndereco().getCep());
 
@@ -192,22 +207,15 @@ public class ConexaoBD {
             }
         }
     }
-    
-    
-        public ResultSet consultaConce() {
+
+    public ResultSet consultaConce() {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Concessionaria";
-                String SQL2 = "SELECT * "
-                                + "FROM  Endereco e, Concessionaria c "
-                                + "Where e.Conc_CNPJ = c.Conc_CNPJ";
-           
 
                 stmt = conn.createStatement(tipo, concorrencia);
-                stmt2 = conn.createStatement(tipo, concorrencia);
 
                 rs = stmt.executeQuery(SQL);
-                rs2 = stmt2.executeQuery(SQL2);
 
                 conn.close();
                 return rs;
@@ -217,11 +225,29 @@ public class ConexaoBD {
         }
         return null;
     }
-        
-            public void excluiConce(String CNPJ) {
+
+    public ResultSet consultaConceEndereco() {
+        if (conectaBD()) {
+            try {
+                String SQL2 = "SELECT * FROM  Endereco e, Concessionaria co WHERE e.Conc_CNPJ = co.Conc_CNPJ";
+
+                stmt2 = conn.createStatement(tipo, concorrencia);
+
+                rs2 = stmt2.executeQuery(SQL2);
+
+                conn.close();
+                return rs2;
+            } catch (SQLException Erro) {
+                System.out.println("Erro na execução da Querry = " + Erro);
+            }
+        }
+        return null;
+    }
+
+    public void excluiConce(String CNPJ) {
         try {
             String SQL = "DELETE FROM Concessionaria WHERE Conc_CNPJ = (?)";
-            
+
             stmt = conn.prepareStatement(SQL, tipo, concorrencia);
 
             pstmt.setInt(1, Integer.parseInt(CNPJ));

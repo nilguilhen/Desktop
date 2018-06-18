@@ -7,7 +7,7 @@ public class Concessionaria implements Serializable {
     
     private String nome;
     private String cnpj;
-    private float tarifa;
+    private String tarifa;
 
     public Endereco getEndereco() {
         return endereco;
@@ -33,11 +33,11 @@ public class Concessionaria implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public float getTarifa() {
+    public String getTarifa() {
         return tarifa;
     }
 
-    public void setTarifa(float tarifa) {
+    public void setTarifa(String tarifa) {
         this.tarifa = tarifa;
     }
 
