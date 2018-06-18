@@ -1,8 +1,5 @@
 package UI;
 
-import Controller.ClienteController;
-import Controller.ConcessionariaController;
-import Controller.ContaController;
 import Model.Cliente;
 import Model.Concessionaria;
 import Model.ContaEnergia;

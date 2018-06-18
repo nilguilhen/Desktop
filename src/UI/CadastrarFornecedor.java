@@ -1,22 +1,23 @@
 package UI;
 
-import Controller.ConcessionariaController;
+import Controller.ConexaoBD;
+
 import Model.Concessionaria;
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
-    private ConcessionariaController concessionariaControle;
-    private int aux = -1;
-    File diretorio = null;
-    private ArrayList<Concessionaria> conc = new ArrayList();
+    ConexaoBD banco = new ConexaoBD();
+    ResultSet rsdados;
+    Concessionaria cc;
+    
 
     public CadastrarFornecedor() {
-        concessionariaControle = new ConcessionariaController();
         initComponents();
     }
 
@@ -290,6 +291,18 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         return c;
     }
 
+    
+        public void ExibeRegistro(ResultSet rs) {
+        try {
+            //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
+            campoNome.setText(rs.getString("conc_nome"));
+            campoCNPJ.setText(rs.getString("conc_cnpj"));
+            campoTarifa.setText(rs.getString("conc_tarifa"));
+
+        } catch (Exception erro) {
+            System.out.println(erro);
+        }
+    }    
 
     private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
         // TODO add your handling code here:
@@ -301,26 +314,20 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bLimparActionPerformed
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-        //aux++;
-        //cadastrar a conc no controlador de conc
-
-        if (diretorio == null) {
-            diretorio = concessionariaControle.selecionaArquivo();
-            ObjectOutputStream escritaBinario = concessionariaControle.CriaEscritorBinario(diretorio, false);
-
-            Concessionaria c = pegarCampo();//setar todos os atributos
-            concessionariaControle.setArray(c);
-            concessionariaControle.EscreveObjeto(escritaBinario, concessionariaControle.getArray(), true);
-            limparCampos();
-
-        } else {
-            //diretorio = concessionariaControle.selecionaArquivo();
-            ObjectOutputStream escritaBinario = concessionariaControle.CriaEscritorBinario(diretorio, false);
-
-            Concessionaria c = pegarCampo();//setar todos os atributos
-            concessionariaControle.setArray(c);
-            concessionariaControle.EscreveObjeto(escritaBinario, concessionariaControle.getArray(), true);
-            limparCampos();
+        
+        rsdados = banco.consultaCliente();
+        
+        try {
+            if (rsdados != null) {
+                if (!rsdados.isFirst()) {
+                    rsdados.first();
+                    ExibeRegistro(rsdados);
+                } else {
+                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
+                }
+            }
+        } catch (Exception erro) {
+            System.out.println(erro);
         }
 
         JOptionPane.showMessageDialog(null, "Concessionaria cadastrada!");
@@ -333,95 +340,57 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
-        if (diretorio == null) {
-            aux = 0;
-            diretorio = concessionariaControle.selecionaArquivo();
-
-            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
-            conc = concessionariaControle.carregaConcessionarias(leitor);
-
-            campoNome.setText(conc.get(aux).getNome());
-            campoRua.setText(conc.get(aux).getEndereco().getRua());
-            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
-            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
-            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
-            campoCEP.setText(conc.get(aux).getEndereco().getCep());
-            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
-            campoPais.setText(conc.get(aux).getEndereco().getPais());
-            campoCNPJ.setText(conc.get(aux).getCnpj());
-            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
-
-        } else if (aux < concessionariaControle.getArray().size() - 1) {
-            aux++;
-            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
-            conc = concessionariaControle.carregaConcessionarias(leitor);
-
-            campoNome.setText(conc.get(aux).getNome());
-            campoRua.setText(conc.get(aux).getEndereco().getRua());
-            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
-            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
-            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
-            campoCEP.setText(conc.get(aux).getEndereco().getCep());
-            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
-            campoPais.setText(conc.get(aux).getEndereco().getPais());
-            campoCNPJ.setText(conc.get(aux).getCnpj());
-            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
-
+      
+        try {
+            if (rsdados != null) {
+                if (!rsdados.isLast()) {
+                    rsdados.next();
+                    ExibeRegistro(rsdados);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
+                }
+            }
+        } catch (Exception erro) {
+            System.out.println(erro);
         }
-
+        
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
 
-        if (diretorio != null && aux != 0) {
-            aux--;
-            ObjectInputStream leitor = concessionariaControle.CriaLeitorBinario(diretorio);
-            conc = concessionariaControle.carregaConcessionarias(leitor);
-
-            campoNome.setText(conc.get(aux).getNome());
-            campoRua.setText(conc.get(aux).getEndereco().getRua());
-            campoNumero.setText(String.valueOf(conc.get(aux).getEndereco().getNumero()));
-            campoComplemento.setText(conc.get(aux).getEndereco().getComplemento());
-            campoCidade.setText(conc.get(aux).getEndereco().getCidade());
-            campoCEP.setText(conc.get(aux).getEndereco().getCep());
-            campoEstado.setText(conc.get(aux).getEndereco().getEstado());
-            campoPais.setText(conc.get(aux).getEndereco().getPais());
-            campoCNPJ.setText(conc.get(aux).getCnpj());
-            campoTarifa.setText(String.valueOf(conc.get(aux).getTarifa()));
-
+        
+        try {
+            if (rsdados != null) {
+                if (!rsdados.isFirst()) {
+                    rsdados.previous();
+                    ExibeRegistro(rsdados);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
+                }
+            }
+        } catch (Exception erro) {
+            System.out.println(erro);
         }
+        
+        
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
 
-        if (diretorio != null) {
-            ObjectOutputStream escritor = concessionariaControle.CriaEscritorBinario(diretorio, false);
-
-            Concessionaria con = new Concessionaria();
-            con.setNome(campoNome.getText());
-            con.setCnpj(campoCNPJ.getText());
-            con.setTarifa(Integer.parseInt(campoTarifa.getText()));
-            con.setRua(campoRua.getText());
-            con.setNumero(Integer.parseInt(campoNumero.getText()));
-            con.setComplemento(campoComplemento.getText());
-            con.setCidade(campoCidade.getText());
-            con.setCep(campoCEP.getText());
-            con.setEstado(campoEstado.getText());
-            con.setPais(campoPais.getText());
-            conc.set(aux, con);
-
-            concessionariaControle.EscreveObjeto(escritor, conc, true);
-            JOptionPane.showMessageDialog(null, "Editado!");
-        }
-
+    
     }//GEN-LAST:event_bAlterarActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
 
-        ObjectOutputStream escritor = concessionariaControle.CriaEscritorBinario(diretorio, false);
+        
+        try {
+            banco.excluiConce(rsdados.getString("conc_cnpj"));
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
 
-        conc.remove(conc.get(aux));
-        concessionariaControle.EscreveObjeto(escritor, conc, true);
+        
         JOptionPane.showMessageDialog(null, "Removido!");
         limparCampos();
 

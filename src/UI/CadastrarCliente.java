@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import teste.view.CadastraFuncionario;
 
 public class CadastrarCliente extends javax.swing.JFrame {
 
@@ -346,11 +345,13 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
+        
         try {
             banco.excluiCliente(rsdados.getString("Cli_CPF"));
         } catch (SQLException ex) {
-            Logger.getLogger(CadastraFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
         JOptionPane.showMessageDialog(null, "Removido!");
         limparCampos();
