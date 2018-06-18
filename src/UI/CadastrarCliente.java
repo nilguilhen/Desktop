@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 public class CadastrarCliente extends javax.swing.JFrame {
 
     ConexaoBD banco = new ConexaoBD();
-    ResultSet rsdados;
+    ResultSet rsdadoscliente;
+    ResultSet rsdadosEndereco;
     Cliente cli;
-    
 
     public CadastrarCliente() {
         initComponents();
@@ -268,11 +268,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     public Cliente pegarCampo() {
         Cliente c = new Cliente();
-        
+
         c.setNome(campoNome.getText());
         c.setCpf(campoCPF.getText());
         c.setIdade(campoIdade.getText());
-        
+
         c.setPais(campoPais.getText());
         c.setEstado(campoEstado.getText());
         c.setCidade(campoCidade.getText());
@@ -280,13 +280,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         c.setNumero(campoNumero.getText());
         c.setComplemento(campoComplemento.getText());
         c.setCep(campoCEP.getText());
-        
-        
 
         return c;
     }
 
-    public void ExibeRegistro(ResultSet rs) {
+    public void ExibeRegistroCliente(ResultSet rs) {
         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
             campoNome.setText(rs.getString("Cli_Nome"));
@@ -296,22 +294,38 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (SQLException erro) {
             System.out.println(erro);
         }
-    }    
-    
-    
+    }
+
+    public void ExibeRegistroEndereco(ResultSet rs2) {
+        try {
+            //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
+            campoPais.setText(rs2.getString("End_Pais"));
+            campoEstado.setText(rs2.getString("End_Estado"));
+            campoCidade.setText(rs2.getString("End_Cidade"));
+            campoRua.setText(rs2.getString("End_Rua"));
+            campoNumero.setText(rs2.getString("End_Nume"));
+            campoComplemento.setText(rs2.getString("End_Complemento"));
+            campoCEP.setText(rs2.getString("End_CEP"));
+
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+    }
+
+
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
 
         cli = pegarCampo();
-        
-        banco.cadastroCliente(cli);      
-        
-        /*rsdados = banco.consultaCliente();
-        
-        try {
-            if (rsdados != null) {
-                if (!rsdados.isFirst()) {
-                    rsdados.first();
-                    ExibeRegistro(rsdados);
+
+        banco.cadastroCliente(cli);
+
+        /*try {
+            if (rsdadoscliente != null && rsdadosEndereco != null) {
+                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
+                    rsdadoscliente.first();
+                    rsdadosEndereco.first();
+                    ExibeRegistroCliente(rsdadoscliente);
+                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
                 }
@@ -319,8 +333,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (SQLException erro) {
             System.out.println(erro);
         }*/
-
-       
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -337,12 +349,16 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bLimparActionPerformed
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
-       
+
+        rsdadoscliente = banco.consultaCliente();
+        rsdadosEndereco = banco.consultaEndereco();
         try {
-            if (rsdados != null) {
-                if (!rsdados.isLast()) {
-                    rsdados.next();
-                    ExibeRegistro(rsdados);
+            if (rsdadoscliente != null && rsdadosEndereco != null) {
+                if (!rsdadoscliente.isLast() && !rsdadosEndereco.isLast()) {
+                    rsdadoscliente.next();
+                    rsdadosEndereco.next();
+                    ExibeRegistroCliente(rsdadoscliente);
+                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
@@ -354,13 +370,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
-        
+
         try {
-            banco.excluiCliente(rsdados.getString("Cli_CPF"));
+            banco.excluiCliente(rsdadoscliente.getString("Cli_CPF"));
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         JOptionPane.showMessageDialog(null, "Removido!");
         limparCampos();
@@ -369,10 +384,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
 
         try {
-            if (rsdados != null) {
-                if (!rsdados.isFirst()) {
-                    rsdados.previous();
-                    ExibeRegistro(rsdados);
+            if (rsdadoscliente != null && rsdadosEndereco != null) {
+                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
+                    rsdadoscliente.previous();
+                    rsdadosEndereco.previous();
+                    ExibeRegistroCliente(rsdadoscliente);
+                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
@@ -380,11 +397,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
         } catch (SQLException erro) {
             System.out.println(erro);
         }
-        
+
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
-        
+
         JOptionPane.showMessageDialog(null, "Dados Alterados com sucesso!");
     }//GEN-LAST:event_bAlterarActionPerformed
 

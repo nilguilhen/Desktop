@@ -86,7 +86,7 @@ public class ConexaoBD {
                 conn.commit();
 
                 pstmt2.setString(1, cliente.getCpf());
-                pstmt2.setString(2, "");
+                //pstmt2.setString(2, "");
                 pstmt2.setString(3, cliente.getEndereco().getPais());
                 pstmt2.setString(4, cliente.getEndereco().getEstado());
                 pstmt2.setString(5, cliente.getEndereco().getCidade());
@@ -109,16 +109,30 @@ public class ConexaoBD {
         if (conectaBD()) {
             try {
                 String SQL = "SELECT * FROM Cliente";
-                String SQL2 = "SELECT * FROM Endereco";
 
                 stmt = conn.createStatement(tipo, concorrencia);
-                stmt2 = conn.createStatement(tipo, concorrencia);
 
                 rs = stmt.executeQuery(SQL);
-                rs2 = stmt2.executeQuery(SQL2);
 
                 conn.close();
                 return rs;
+            } catch (SQLException Erro) {
+                System.out.println("Erro na execução da Querry = " + Erro);
+            }
+        }
+        return null;
+    }
+        public ResultSet consultaEndereco() {
+        if (conectaBD()) {
+            try {
+                String SQL2 = "SELECT * FROM Endereco e, Cliente cl WHERE cl.Cli_CPF = e.Cli_CPF";
+
+                stmt2 = conn.createStatement(tipo, concorrencia);
+
+                rs2 = stmt2.executeQuery(SQL2);
+
+                conn.close();
+                return rs2;
             } catch (SQLException Erro) {
                 System.out.println("Erro na execução da Querry = " + Erro);
             }
