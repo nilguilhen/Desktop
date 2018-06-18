@@ -285,9 +285,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     public void ExibeRegistro(ResultSet rs) {
         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
-            campoNome.setText(String.valueOf(rs.getString("cli_nome")));
-            campoCPF.setText(rs.getString("cli_cpf"));
-            campoIdade.setText(rs.getString("cli_idade"));
+            campoNome.setText(String.valueOf(rs.getString("Cli_Nome")));
+            campoCPF.setText(rs.getString("Cli_CPF"));
+            campoIdade.setText(rs.getString("Cli_Idade"));
 
         } catch (Exception erro) {
             System.out.println(erro);
@@ -347,7 +347,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
         try {
-            banco.excluiCliente(rsdados.getString("cli_cpf"));
+            banco.excluiCliente(rsdados.getString("Cli_CPF"));
         } catch (SQLException ex) {
             Logger.getLogger(CadastraFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
