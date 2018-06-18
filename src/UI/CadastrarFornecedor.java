@@ -14,20 +14,20 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     ConexaoBD banco = new ConexaoBD();
     ResultSet rsdadosconce;
-    ResultSet rsdadosendereco;
+    ResultSet rsdadosEndereco;
     Concessionaria cc;
     
 
     public CadastrarFornecedor() {
         initComponents();
         rsdadosconce = banco.consultaConce();
-        rsdadosendereco = banco.consultaConceEndereco();
+        rsdadosEndereco = banco.consultaConceEndereco();
         
         try {
-            if (rsdadosconce != null && rsdadosendereco != null) {
-                if (!rsdadosconce.isFirst() && !rsdadosendereco.isFirst()) {
+            if (rsdadosconce != null && rsdadosEndereco != null) {
+                if (!rsdadosconce.isFirst() && !rsdadosEndereco.isFirst()) {
                     rsdadosconce.first();
-                    rsdadosendereco.first();
+                    rsdadosEndereco.first();
                     ExibeRegistroConce(rsdadosconce);
                     ExibeRegistroEndereco(rsdadosconce);
                 } else {
@@ -329,7 +329,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }  
         
      public void ExibeRegistroEndereco(ResultSet rs2) {
-        try {
+         try {
             //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
             campoPais.setText(rs2.getString("End_Pais"));
             campoEstado.setText(rs2.getString("End_Estado"));
@@ -384,12 +384,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
       
         try {
-            if (rsdadosconce != null && rsdadosendereco != null) {
-                if (!rsdadosconce.isLast() && !rsdadosendereco.isLast()) {
+            if (rsdadosconce != null && rsdadosEndereco != null) {
+                if (!rsdadosconce.isLast() && !rsdadosEndereco.isLast()) {
                     rsdadosconce.next();
-                    rsdadosendereco.next();
+                    rsdadosEndereco.next();
                     ExibeRegistroConce(rsdadosconce);
-                    ExibeRegistroEndereco(rsdadosendereco);
+                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
@@ -402,12 +402,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
         try {
-            if (rsdadosconce != null && rsdadosendereco != null) {
-                if (!rsdadosconce.isFirst() && !rsdadosendereco.isFirst()) {
+            if (rsdadosconce != null && rsdadosEndereco != null) {
+                if (!rsdadosconce.isFirst() && !rsdadosEndereco.isFirst()) {
                     rsdadosconce.previous();
-                    rsdadosendereco.previous();
+                    rsdadosEndereco.previous();
                     ExibeRegistroConce(rsdadosconce);
-                    ExibeRegistroEndereco(rsdadosendereco);
+                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
