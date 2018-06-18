@@ -24,15 +24,18 @@ import Model.Endereco;
 public class ConexaoBD {
 
     private Connection conn = null;
-    
+
     private Statement stmt = null;
     private Statement stmt2 = null;
-    
+
     private ResultSet rs2 = null;
     private ResultSet rs = null;
-    
+
     private PreparedStatement pstmt = null;
     private PreparedStatement pstmt2 = null;
+
+    int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
+    int concorrencia = ResultSet.CONCUR_UPDATABLE;
 
     public boolean conectaBD() {
 
@@ -70,12 +73,11 @@ public class ConexaoBD {
 
         if (conectaBD()) {
             try {
-                String SQL = "INSERTO INTO Cliente(Cli_Nome,Cli_CPF,Cli_Idade) VALUES (?,?,?)";
+                String SQL = "INSERTO INTO Cliente Cli_Nome,Cli_CPF,Cli_Idade VALUES (?,?,?)";
                 String SQL2 = "INSERTO INTO Endereco (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,"
                         + "End_Rua,End_Numero,End_Complemento,End_CEP)"
                         + "VALUES (?,?,?,?,?,?,?,?,?)";
-                int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
-                int concorrencia = ResultSet.CONCUR_UPDATABLE;
+
                 pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
                 pstmt2 = conn.prepareStatement(SQL2, tipo, concorrencia);
 
@@ -110,18 +112,15 @@ public class ConexaoBD {
             try {
                 String SQL = "SELECT * FROM Cliente";
                 String SQL2 = "SELECT Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco";
-                
-                int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
-                int concorrencia = ResultSet.CONCUR_UPDATABLE;
-                
+
                 stmt = conn.createStatement(tipo, concorrencia);
                 stmt2 = conn.createStatement(tipo, concorrencia);
-                
+
                 rs = stmt.executeQuery(SQL);
                 rs2 = stmt2.executeQuery(SQL2);
 
                 conn.close();
-                return rs;            
+                return rs;
             } catch (SQLException Erro) {
                 System.out.println("Erro na execução da Querry = " + Erro);
             }
@@ -132,8 +131,7 @@ public class ConexaoBD {
     public void excluiCliente(String CPF) {
         try {
             String SQL = "DELETE FROM Cliente WHERE Cli_CPF = (?)";
-            int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;//(c)
-            int concorrencia = ResultSet.CONCUR_UPDATABLE;
+            
             stmt = conn.prepareStatement(SQL, tipo, concorrencia);
 
             pstmt.setInt(1, Integer.parseInt(CPF));
@@ -143,6 +141,67 @@ public class ConexaoBD {
         } catch (SQLException Erro) {
             System.out.println("Erro ao Deletar = " + Erro);
         }
+    }
+    
+    public void cadastroConce(Concessionaria conce) {
+
+        if (conectaBD()) {
+            try {
+                String SQL = "INSERTO INTO Concessionaria Conc_Nome, Conc_CNPJ, Conc_Tarifa VALUES (?,?,?)";
+                String SQL2 = "INSERTO INTO Endereco (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,"
+                        + "End_Rua,End_Numero,End_Complemento,End_CEP)"
+                        + "VALUES (?,?,?,?,?,?,?,?,?)";
+
+                pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
+                pstmt2 = conn.prepareStatement(SQL2, tipo, concorrencia);
+
+                pstmt.setString(1, conce.getNome());
+                pstmt.setString(2, conce.getCnpj());
+                pstmt.setString(3, String.valueOf(conce.getTarifa()));
+                pstmt.executeUpdate();
+                conn.commit();
+
+                pstmt2.setString(1, "");
+                pstmt2.setString(2, conce.getCnpj());
+                pstmt2.setString(3, conce.getEndereco().getPais());
+                pstmt2.setString(4, conce.getEndereco().getEstado());
+                pstmt2.setString(5, conce.getEndereco().getCidade());
+                pstmt2.setString(6, conce.getEndereco().getRua());
+                pstmt2.setString(7, String.valueOf(conce.getEndereco().getNumero()));
+                pstmt2.setString(8, conce.getEndereco().getComplemento());
+                pstmt2.setString(9, conce.getEndereco().getCep());
+
+                pstmt2.executeUpdate();
+
+                conn.commit();
+                conn.close();
+            } catch (SQLException Erro) {
+                System.out.println("Erro" + Erro);
+            }
+        }
+    }
+    
+    
+        public ResultSet consultaConce() {
+        if (conectaBD()) {
+            try {
+                String SQL = "SELECT * FROM Concessionaria";
+                String SQL2 = "SELECT (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,End_Rua,End_Numero,End_Complemento,End_CEP FROM Endereco) FROM Endereco e, Concessionaria c Where e.Conc_CNPJ = c.Conc_CNPJ";
+           
+
+                stmt = conn.createStatement(tipo, concorrencia);
+                stmt2 = conn.createStatement(tipo, concorrencia);
+
+                rs = stmt.executeQuery(SQL);
+                rs2 = stmt2.executeQuery(SQL2);
+
+                conn.close();
+                return rs;
+            } catch (SQLException Erro) {
+                System.out.println("Erro na execução da Querry = " + Erro);
+            }
+        }
+        return null;
     }
 
 }
