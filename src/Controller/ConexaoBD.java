@@ -24,13 +24,13 @@ public class ConexaoBD {
     private Connection conn = null;
 
     private Statement stmt = null;
-    private Statement stmt2 = null;
+   // private Statement stmt2 = null;
 
-    private ResultSet rs2 = null;
+   // private ResultSet rs2 = null;
     private ResultSet rs = null;
 
     private PreparedStatement pstmt = null;
-    private PreparedStatement pstmt2 = null;
+  //  private PreparedStatement pstmt2 = null;
 
     int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
     int concorrencia = ResultSet.CONCUR_UPDATABLE;
@@ -71,31 +71,22 @@ public class ConexaoBD {
 
         if (conectaBD()) {
             try {
-                String SQL = "INSERT INTO Cliente (Cli_Nome,Cli_CPF,Cli_Idade) VALUES (?,?,?)";
-                String SQL2 = "INSERT INTO Endereco (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,"
-                        + "End_Rua,End_Nume,End_Complemento,End_CEP)"
-                        + "VALUES (?,?,?,?,?,?,?,?,?)";
-
+                String SQL = "INSERT INTO Cliente (Cli_Nome,Cli_CPF,Cli_Idade,Cli_Pais,Cli_Estado,Cli_Cidade,Cli_Rua,Cli_Nume,Cli_Complemento,Cli_CEP) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                
                 pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
-                pstmt2 = conn.prepareStatement(SQL2, tipo, concorrencia);
 
                 pstmt.setString(1, cliente.getNome());
                 pstmt.setString(2, cliente.getCpf());
-                pstmt.setString(3, String.valueOf(cliente.getIdade()));
+                pstmt.setString(3, cliente.getIdade());
+                pstmt.setString(4, cliente.getPais());
+                pstmt.setString(5, cliente.getEstado());
+                pstmt.setString(6, cliente.getCidade());
+                pstmt.setString(7, cliente.getRua());
+                pstmt.setString(8, cliente.getNumero());
+                pstmt.setString(9, cliente.getComplemento());
+                pstmt.setString(10, cliente.getCep());
+  
                 pstmt.executeUpdate();
-                conn.commit();
-
-                pstmt2.setString(1, cliente.getCpf());
-                pstmt2.setString(2, "");
-                pstmt2.setString(3, cliente.getEndereco().getPais());
-                pstmt2.setString(4, cliente.getEndereco().getEstado());
-                pstmt2.setString(5, cliente.getEndereco().getCidade());
-                pstmt2.setString(6, cliente.getEndereco().getRua());
-                pstmt2.setString(7, cliente.getEndereco().getNumero());
-                pstmt2.setString(8, cliente.getEndereco().getComplemento());
-                pstmt2.setString(9, cliente.getEndereco().getCep());
-                pstmt2.executeUpdate();
-
                 conn.commit();
 
                 conn.close();
@@ -105,6 +96,35 @@ public class ConexaoBD {
         }
     }
 
+    public void alteraCliente(Cliente cliente) {
+
+        if (conectaBD()) {
+            try {
+                String SQL = "UPDATE Cliente SET Cli_Nome =?, Cli_Idade =?, Cli_Pais =?, Cli_Estado =?, Cli_Cidade =?, Cli_Rua =?, Cli_Nume =? ,Cli_Complemento =?, Cli_CEP =? WHERE Cli_CPF = ?";
+                
+                pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
+
+                pstmt.setString(1, cliente.getNome());
+                pstmt.setString(2, cliente.getIdade());
+                pstmt.setString(3, cliente.getPais());
+                pstmt.setString(4, cliente.getEstado());
+                pstmt.setString(5, cliente.getCidade());
+                pstmt.setString(6, cliente.getRua());
+                pstmt.setString(7, cliente.getNumero());
+                pstmt.setString(8, cliente.getComplemento());
+                pstmt.setString(9, cliente.getCep());
+                pstmt.setString(10, cliente.getCpf());
+  
+                pstmt.executeUpdate();
+                conn.commit();
+
+                conn.close();
+            } catch (SQLException Erro) {
+                System.out.println("Erro" + Erro);
+            }
+        }
+    }
+    
     public ResultSet consultaCliente() {
         if (conectaBD()) {
             try {
@@ -123,50 +143,18 @@ public class ConexaoBD {
         return null;
     }
 
-    public ResultSet consultaClienteEndereco() {
-        if (conectaBD()) {
-            try {
-                String SQL2 = "SELECT * FROM Endereco e, Cliente cl WHERE e.Cli_CPF = cl.Cli_CPF";
-
-                stmt2 = conn.createStatement(tipo, concorrencia);
-
-                rs2 = stmt2.executeQuery(SQL2);
-
-                conn.close();
-                return rs2;
-            } catch (SQLException Erro) {
-                System.out.println("Erro na execução da Querry = " + Erro);
-            }
-        }
-        return null;
-    }
-
     public void excluiCliente(String CPF) {
-        try {
-            String SQL = "DELETE FROM Cliente WHERE Cli_CPF = (?)";
+        if(conectaBD()){
+            try {
+                String SQL = "DELETE FROM Cliente WHERE Cli_CPF = (?)";
 
-            stmt = conn.prepareStatement(SQL, tipo, concorrencia);
-            pstmt.setString(1, CPF);
-            pstmt.executeUpdate();
-            conn.commit();
-            conn.close();
-        } catch (SQLException Erro) {
-            System.out.println("Erro ao Deletar = " + Erro);
-        }
-    }
-
-    public void excluiEnderecoCliente(String CPF) {
-        try {
-            String SQL2 = "DELETE FROM Endereco WHERE Cli_CPF = (?)";
-
-            stmt = conn.prepareStatement(SQL2, tipo, concorrencia);
-            pstmt.setString(1, CPF);
-            pstmt.executeUpdate();
-            conn.commit();
-            conn.close();
-
-        } catch (SQLException Erro) {
-            System.out.println("Erro ao Deletar = " + Erro);
+                pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
+                pstmt.setString(1, CPF);
+                pstmt.executeUpdate();
+                conn.commit();
+            } catch (SQLException Erro) {
+                System.out.println("Erro ao Deletar = " + Erro);
+            }
         }
     }
 
@@ -174,33 +162,53 @@ public class ConexaoBD {
 
         if (conectaBD()) {
             try {
-                String SQL = "INSERT INTO Concessionaria (Conc_Nome, Conc_CNPJ, Conc_Tarifa) VALUES (?,?,?)";
-                String SQL2 = "INSERT INTO Endereco (Cli_CPF,Conc_CNPJ,End_Pais,End_Estado,End_Cidade,"
-                        + "End_Rua,End_Nume,End_Complemento,End_CEP)"
-                        + "VALUES (?,?,?,?,?,?,?,?,?)";
+                String SQL = "INSERT INTO Concessionaria (Conc_Nome, Conc_CNPJ, Conc_Tarifa, Conc_Pais,Conc_Estado,Conc_Cidade,Conc_Rua,Conc_Nume,Conc_Complemento,Conc_CEP) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
                 pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
-                pstmt2 = conn.prepareStatement(SQL2, tipo, concorrencia);
 
                 pstmt.setString(1, conce.getNome());
                 pstmt.setString(2, conce.getCnpj());
                 pstmt.setString(3, conce.getTarifa());
+                pstmt.setString(4, conce.getPais());
+                pstmt.setString(5, conce.getEstado());
+                pstmt.setString(6, conce.getCidade());
+                pstmt.setString(7, conce.getRua());
+                pstmt.setString(8, conce.getNumero());
+                pstmt.setString(9, conce.getComplemento());
+                pstmt.setString(10,conce.getCep());
+                
                 pstmt.executeUpdate();
                 conn.commit();
 
-                pstmt2.setString(1, "");
-                pstmt2.setString(2, conce.getCnpj());
-                pstmt2.setString(3, conce.getEndereco().getPais());
-                pstmt2.setString(4, conce.getEndereco().getEstado());
-                pstmt2.setString(5, conce.getEndereco().getCidade());
-                pstmt2.setString(6, conce.getEndereco().getRua());
-                pstmt2.setString(7, conce.getEndereco().getNumero());
-                pstmt2.setString(8, conce.getEndereco().getComplemento());
-                pstmt2.setString(9, conce.getEndereco().getCep());
+                conn.close();
+            } catch (SQLException Erro) {
+                System.out.println("Erro" + Erro);
+            }
+        }
+    }
+    
+    public void alteraConce(Concessionaria conce) {
 
-                pstmt2.executeUpdate();
+        if (conectaBD()) {
+            try {
+                String SQL = "UPDATE Concessionaria SET Conc_Nome =?, Conc_Tarifa =?, Conc_Pais =?, Conc_Estado =?, Conc_Cidade =?, Conc_Rua =?, Conc_Nume =? ,Conc_Complemento =?, Conc_CEP =? WHERE Conc_CNPJ = ?";
+                
+                pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
 
+                pstmt.setString(1, conce.getNome());
+                pstmt.setString(2, conce.getTarifa());
+                pstmt.setString(3, conce.getPais());
+                pstmt.setString(4, conce.getEstado());
+                pstmt.setString(5, conce.getCidade());
+                pstmt.setString(6, conce.getRua());
+                pstmt.setString(7, conce.getNumero());
+                pstmt.setString(8, conce.getComplemento());
+                pstmt.setString(9, conce.getCep());
+                pstmt.setString(10, conce.getCnpj());
+  
+                pstmt.executeUpdate();
                 conn.commit();
+
                 conn.close();
             } catch (SQLException Erro) {
                 System.out.println("Erro" + Erro);
@@ -226,29 +234,12 @@ public class ConexaoBD {
         return null;
     }
 
-    public ResultSet consultaConceEndereco() {
-        if (conectaBD()) {
-            try {
-                String SQL2 = "SELECT * FROM  Endereco e, Concessionaria co WHERE e.Conc_CNPJ = co.Conc_CNPJ";
-
-                stmt2 = conn.createStatement(tipo, concorrencia);
-
-                rs2 = stmt2.executeQuery(SQL2);
-
-                conn.close();
-                return rs2;
-            } catch (SQLException Erro) {
-                System.out.println("Erro na execução da Querry = " + Erro);
-            }
-        }
-        return null;
-    }
 
     public void excluiConce(String CNPJ) {
         try {
             String SQL = "DELETE FROM Concessionaria WHERE Conc_CNPJ = (?)";
 
-            stmt = conn.prepareStatement(SQL, tipo, concorrencia);
+            pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
 
             pstmt.setInt(1, Integer.parseInt(CNPJ));
             pstmt.executeUpdate();

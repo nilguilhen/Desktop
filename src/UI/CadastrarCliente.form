@@ -152,15 +152,33 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="labelIdade">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Idade"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="campoNome">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoRua">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoNumero">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoComplemento">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoCidade">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoCEP">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoEstado">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoPais">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoCPF">
     </Component>
     <Component class="javax.swing.JTextField" name="campoIdade">
+    </Component>
+    <Component class="javax.swing.JButton" name="bLimpar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bLimparActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bCadastrar">
       <Properties>
@@ -210,6 +228,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAnteriorActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="labelIdade">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Idade"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="labelComplemento">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -217,8 +243,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Complemento"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoComplemento">
     </Component>
     <Component class="javax.swing.JLabel" name="labelCidade">
       <Properties>
@@ -228,8 +252,6 @@
         <Property name="text" type="java.lang.String" value="Cidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoCidade">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelCEP">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -237,8 +259,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="CEP"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoCEP">
     </Component>
     <Component class="javax.swing.JLabel" name="labelEstado">
       <Properties>
@@ -248,8 +268,6 @@
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoEstado">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelPais">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -257,8 +275,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pa&#xed;s"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoPais">
     </Component>
     <Component class="javax.swing.JLabel" name="labelTittle">
       <Properties>
@@ -277,8 +293,6 @@
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoNome">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelRua">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -286,8 +300,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Rua"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoRua">
     </Component>
     <Component class="javax.swing.JLabel" name="labelNumero">
       <Properties>
@@ -297,8 +309,6 @@
         <Property name="text" type="java.lang.String" value="N&#xfa;mero"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoNumero">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelCPF">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -306,16 +316,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="CPF"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoCPF">
-    </Component>
-    <Component class="javax.swing.JButton" name="bLimpar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Limpar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bLimparActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

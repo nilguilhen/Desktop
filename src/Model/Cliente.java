@@ -3,11 +3,16 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable {
 
-    Endereco endereco = new Endereco();
-
     private String nome;
     private String cpf;
     private String idade;
+    private String pais;  
+    private String estado;
+    private String cidade;
+    private String rua;
+    private String numero;
+    private String complemento;
+    private String cep;
 
     public String getNome() {
         return nome;
@@ -33,35 +38,61 @@ public class Cliente implements Serializable {
         this.idade = idade;
     }
 
-    public void setRua(String rua) {
-        endereco.setRua(rua);
-    }
-
-    public void setNumero(String numero) {
-        endereco.setNumero(numero);
-    }
-
-    public void setComplemento(String comp) {
-        endereco.setComplemento(comp);
-    }
-
-    public void setCidade(String cidade) {
-        endereco.setCidade(cidade);
-    }
-
-    public void setEstado(String estado) {
-        endereco.setEstado(estado);
+    public String getPais() {
+        return pais;
     }
 
     public void setPais(String pais) {
-        endereco.setPais(pais);
+        this.pais = pais;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getCep() {
+        return cep;
     }
 
     public void setCep(String cep) {
-        endereco.setCep(cep);
-    }
-    public Endereco getEndereco() {
-        return endereco;
+        this.cep = cep;
     }
 
+   
 }

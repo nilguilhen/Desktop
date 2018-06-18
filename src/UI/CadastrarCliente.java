@@ -12,27 +12,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     ConexaoBD banco = new ConexaoBD();
     ResultSet rsdadoscliente;
-    ResultSet rsdadosEndereco;
     Cliente cli;
 
     public CadastrarCliente() {
         initComponents();
-        rsdadoscliente = banco.consultaCliente();
-        rsdadosEndereco = banco.consultaClienteEndereco();
-        try {
-            if (rsdadoscliente != null && rsdadosEndereco != null) {
-                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
-                    rsdadoscliente.first();
-                    rsdadosEndereco.first();
-                    ExibeRegistroCliente(rsdadoscliente);
-                    ExibeRegistroEndereco(rsdadosEndereco);
-                } else {
-                    JOptionPane.showMessageDialog(this, "O primeiro registro ja esta selecionado.");
-                }
-            }
-        } catch (SQLException erro) {
-            System.out.println(erro);
-        }
+        primeiroRegistro();
 
     }
 
@@ -45,39 +29,43 @@ public class CadastrarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelIdade = new javax.swing.JLabel();
+        campoNome = new javax.swing.JTextField();
+        campoRua = new javax.swing.JTextField();
+        campoNumero = new javax.swing.JTextField();
+        campoComplemento = new javax.swing.JTextField();
+        campoCidade = new javax.swing.JTextField();
+        campoCEP = new javax.swing.JTextField();
+        campoEstado = new javax.swing.JTextField();
+        campoPais = new javax.swing.JTextField();
+        campoCPF = new javax.swing.JTextField();
         campoIdade = new javax.swing.JTextField();
+        bLimpar = new javax.swing.JButton();
         bCadastrar = new javax.swing.JButton();
         bAlterar = new javax.swing.JButton();
         bDeletar = new javax.swing.JButton();
         bHome = new javax.swing.JButton();
         bProximo = new javax.swing.JButton();
         bAnterior = new javax.swing.JButton();
+        labelIdade = new javax.swing.JLabel();
         labelComplemento = new javax.swing.JLabel();
-        campoComplemento = new javax.swing.JTextField();
         labelCidade = new javax.swing.JLabel();
-        campoCidade = new javax.swing.JTextField();
         labelCEP = new javax.swing.JLabel();
-        campoCEP = new javax.swing.JTextField();
         labelEstado = new javax.swing.JLabel();
-        campoEstado = new javax.swing.JTextField();
         labelPais = new javax.swing.JLabel();
-        campoPais = new javax.swing.JTextField();
         labelTittle = new javax.swing.JLabel();
         labelNome = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
         labelRua = new javax.swing.JLabel();
-        campoRua = new javax.swing.JTextField();
         labelNumero = new javax.swing.JLabel();
-        campoNumero = new javax.swing.JTextField();
         labelCPF = new javax.swing.JLabel();
-        campoCPF = new javax.swing.JTextField();
-        bLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelIdade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        labelIdade.setText("Idade");
+        bLimpar.setText("Limpar");
+        bLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLimparActionPerformed(evt);
+            }
+        });
 
         bCadastrar.setText("Cadastrar");
         bCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +109,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
+        labelIdade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelIdade.setText("Idade");
+
         labelComplemento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelComplemento.setText("Complemento");
 
@@ -151,13 +142,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         labelCPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         labelCPF.setText("CPF");
-
-        bLimpar.setText("Limpar");
-        bLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bLimparActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,6 +254,39 @@ public class CadastrarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void primeiroRegistro(){  
+        rsdadoscliente = banco.consultaCliente();
+        try {
+            if (rsdadoscliente != null) {
+                if (!rsdadoscliente.isFirst()) {
+                    rsdadoscliente.first();;
+                    ExibeRegistroCliente(rsdadoscliente);                 
+                } else {
+                    JOptionPane.showMessageDialog(this, "Primeiro cliente ja mostrado");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+    }
+    
+    public void ultimoRegistro() {
+        try {
+            if (rsdadoscliente != null) {
+                if (!rsdadoscliente.isLast()) {
+                    rsdadoscliente.last();
+                    ExibeRegistroCliente(rsdadoscliente);
+                } else {
+                    JOptionPane.showMessageDialog(this, "O ultimo registro ja esta selecionado.");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
+    }
+    
+    
+    
     public void limparCampos() {
         campoCEP.setText("");
         campoCPF.setText("");
@@ -289,7 +306,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         c.setNome(campoNome.getText());
         c.setCpf(campoCPF.getText());
         c.setIdade(campoIdade.getText());
-
         c.setPais(campoPais.getText());
         c.setEstado(campoEstado.getText());
         c.setCidade(campoCidade.getText());
@@ -303,39 +319,29 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     public void ExibeRegistroCliente(ResultSet rs) {
         try {
-            //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
             campoNome.setText(rs.getString("Cli_Nome"));
             campoCPF.setText(rs.getString("Cli_CPF"));
             campoIdade.setText(rs.getString("Cli_Idade"));
+            campoPais.setText(rs.getString("Cli_Pais"));
+            campoEstado.setText(rs.getString("Cli_Estado"));
+            campoCidade.setText(rs.getString("Cli_Cidade"));
+            campoRua.setText(rs.getString("Cli_Rua"));
+            campoNumero.setText(rs.getString("Cli_Nume"));
+            campoComplemento.setText(rs.getString("Cli_Complemento"));
+            campoCEP.setText(rs.getString("Cli_CEP"));
 
         } catch (SQLException erro) {
             System.out.println(erro);
         }
     }
-
-    public void ExibeRegistroEndereco(ResultSet rs2) {
-        try {
-            //faz a leitura do registro corrento do ResutSet e atribui os valores lidos aos objetos visuais (Textfields)
-            campoPais.setText(rs2.getString("End_Pais"));
-            campoEstado.setText(rs2.getString("End_Estado"));
-            campoCidade.setText(rs2.getString("End_Cidade"));
-            campoRua.setText(rs2.getString("End_Rua"));
-            campoNumero.setText(rs2.getString("End_Nume"));
-            campoComplemento.setText(rs2.getString("End_Complemento"));
-            campoCEP.setText(rs2.getString("End_CEP"));
-
-        } catch (SQLException erro) {
-            System.out.println(erro);
-        }
-    }
-
 
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
 
         cli = pegarCampo();
-
         banco.cadastroCliente(cli);
-
+        rsdadoscliente = banco.consultaCliente();
+        ultimoRegistro();
+        JOptionPane.showMessageDialog(this, "Cliente " + campoNome.getText() + " foi cadastrado com sucesso!");
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
@@ -353,15 +359,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
-        rsdadoscliente = banco.consultaCliente();
-        rsdadosEndereco = banco.consultaClienteEndereco();
         try {
             if (rsdadoscliente != null) {
-                if ((!rsdadoscliente.isLast()) && (!rsdadosEndereco.isLast())) {
+                if (!rsdadoscliente.isLast()) {
                     rsdadoscliente.next();
-                    rsdadosEndereco.next();
                     ExibeRegistroCliente(rsdadoscliente);
-                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
                 }
@@ -374,11 +376,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
 
-        rsdadoscliente = banco.consultaCliente();
-        //rsdadosEndereco = banco.consultaEndereco();
-        
         try {
-            //banco.excluiEnderecoCliente(rsdadosEndereco.getString("Cli_CPF"));
             banco.excluiCliente(rsdadoscliente.getString("Cli_CPF"));
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -386,17 +384,17 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, "Removido!");
         limparCampos();
+        rsdadoscliente = banco.consultaCliente();
+        primeiroRegistro();
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
 
         try {
-            if (rsdadoscliente != null && rsdadosEndereco != null) {
-                if (!rsdadoscliente.isFirst() && !rsdadosEndereco.isFirst()) {
+            if (rsdadoscliente != null) {
+                if (!rsdadoscliente.isFirst()) {
                     rsdadoscliente.previous();
-                    rsdadosEndereco.previous();
                     ExibeRegistroCliente(rsdadoscliente);
-                    ExibeRegistroEndereco(rsdadosEndereco);
                 } else {
                     JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
                 }
@@ -408,8 +406,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
-
-        JOptionPane.showMessageDialog(null, "Dados Alterados com sucesso!");
+        cli = pegarCampo();
+        banco.alteraCliente(cli);
+        primeiroRegistro();
+        JOptionPane.showMessageDialog(this, "Cliente " + campoNome.getText() + " foi alterado com sucesso!");
     }//GEN-LAST:event_bAlterarActionPerformed
 
     /**
