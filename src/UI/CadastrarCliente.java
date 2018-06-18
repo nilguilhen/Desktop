@@ -300,12 +300,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     
     
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-       
-       
+
         cli = pegarCampo();
-        banco.cadastroCliente(cli);
         
-        rsdados = banco.consultaCliente();
+        banco.cadastroCliente(cli);      
+        
+        /*rsdados = banco.consultaCliente();
         
         try {
             if (rsdados != null) {
@@ -318,9 +318,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         } catch (SQLException erro) {
             System.out.println(erro);
-        }
+        }*/
 
-        JOptionPane.showMessageDialog(null, "Deus eh mais!");
+       
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
