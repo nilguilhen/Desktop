@@ -356,7 +356,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         rsdadoscliente = banco.consultaCliente();
         rsdadosEndereco = banco.consultaClienteEndereco();
         try {
-            if (rsdadoscliente != null && rsdadosEndereco != null) {
+            if (rsdadoscliente != null) {
                 if ((!rsdadoscliente.isLast()) && (!rsdadosEndereco.isLast())) {
                     rsdadoscliente.next();
                     rsdadosEndereco.next();
