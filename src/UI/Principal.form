@@ -28,26 +28,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="bGerarConta" min="-2" pref="307" max="-2" attributes="0"/>
-                  <Component id="bChamarConcessionaria" min="-2" pref="307" max="-2" attributes="0"/>
                   <Component id="bChamarCliente" min="-2" pref="307" max="-2" attributes="0"/>
+                  <Component id="bChamarConcessionaria" min="-2" pref="307" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Component id="bChamarCliente" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               <Component id="bChamarConcessionaria" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
-              <Component id="bGerarConta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace pref="105" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,14 +64,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bChamarConcessionariaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bGerarConta">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gerar Conta"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bGerarContaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

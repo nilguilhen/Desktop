@@ -19,7 +19,6 @@ public class Principal extends javax.swing.JFrame {
 
         bChamarCliente = new javax.swing.JButton();
         bChamarConcessionaria = new javax.swing.JButton();
-        bGerarConta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,35 +36,25 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        bGerarConta.setText("Gerar Conta");
-        bGerarConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bGerarContaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bGerarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bChamarConcessionaria, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bChamarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                    .addComponent(bChamarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bChamarConcessionaria, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(78, 78, 78)
                 .addComponent(bChamarCliente)
-                .addGap(63, 63, 63)
+                .addGap(71, 71, 71)
                 .addComponent(bChamarConcessionaria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(bGerarConta)
-                .addGap(53, 53, 53))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 416, 339);
@@ -76,12 +65,6 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
         new CadastrarCliente().setVisible(true);
     }//GEN-LAST:event_bChamarClienteActionPerformed
-
-    private void bGerarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarContaActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new GerarConta().setVisible(true);
-    }//GEN-LAST:event_bGerarContaActionPerformed
 
     private void bChamarConcessionariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChamarConcessionariaActionPerformed
         // TODO add your handling code here:
@@ -127,6 +110,5 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bChamarCliente;
     private javax.swing.JButton bChamarConcessionaria;
-    private javax.swing.JButton bGerarConta;
     // End of variables declaration//GEN-END:variables
 }
