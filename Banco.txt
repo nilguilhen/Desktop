@@ -1,0 +1,35 @@
+CREATE TABLE Cliente (
+    Cli_Nome VARCHAR(100),
+    Cli_CPF VARCHAR(11),
+    Cli_Idade VARCHAR(2),
+    Cli_Pais VARCHAR(50),
+    Cli_Estado VARCHAR(50),
+    Cli_Cidade VARCHAR(50),
+    Cli_Rua VARCHAR(100),
+    Cli_Nume VARCHAR(4),
+    Cli_Complemento VARCHAR(100),
+    Cli_CEP VARCHAR(10),
+	CONSTRAINT Pk_CPF PRIMARY KEY (Cli_CPF));
+    
+      
+CREATE TABLE Concessionaria(
+    Conc_Nome VARCHAR(50),
+    Conc_CNPJ VARCHAR(20),
+    Conc_Tarifa VARCHAR(11),
+    Conc_Pais VARCHAR(50),
+    Conc_Estado VARCHAR(50),
+    Conc_Cidade VARCHAR(50),
+    Conc_Rua VARCHAR(100),
+    Conc_Nume VARCHAR(4),
+    Conc_Complemento VARCHAR(100),
+    Conc_CEP VARCHAR(10),
+	CONSTRAINT Pk_Conc_CNPJ PRIMARY KEY (Conc_CNPJ));
+    
+
+ /*   
+Drop table Cliente;
+Drop table Concessionaria;
+*/
+
+SELECT * FROM Cliente;
+SELECT * FROM Concessionaria;
