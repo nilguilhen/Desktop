@@ -240,7 +240,6 @@ public class ConexaoBD {
                 String SQL = "DELETE FROM Concessionaria WHERE Conc_CNPJ = (?)";
 
                 pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
-
                 pstmt.setString(1, CNPJ);
                 pstmt.executeUpdate();
                 conn.commit();
@@ -249,6 +248,25 @@ public class ConexaoBD {
                 System.out.println("Erro ao Deletar = " + Erro);
             }
         }
+    }
+
+    public ResultSet pegaTarifa(String CPF) {
+        if (conectaBD()) {
+            try {
+                String SQL = "SELECT Conc_Tarifa FROM Concessionaria co, Cliente cl WHERE co.Conc_Estado = cl.Cli_Estado and cl.Cli_CPF = ?";
+
+                stmt = conn.createStatement(tipo, concorrencia);
+                pstmt.setString(1, CPF);
+
+                rs = stmt.executeQuery(SQL);
+
+                conn.close();
+                return rs;
+            } catch (SQLException Erro) {
+                System.out.println("Erro ao pegar Tarifa = " + Erro);
+            }
+        }
+        return null;
     }
 
 }

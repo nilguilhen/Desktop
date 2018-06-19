@@ -5,22 +5,22 @@ import java.io.Serializable;
 public class ContaEnergia implements Serializable {
 
     private String cpf;
-    private float kwh;
-    private float valor;
+    private String kwh;
+    private String valor;
 
-    public float getKwh() {
+    public String getKwh() {
         return kwh;
     }
 
-    public void setKwh(float kwh) {
+    public void setKwh(String kwh) {
         this.kwh = kwh;
     }
 
-    public float getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
     

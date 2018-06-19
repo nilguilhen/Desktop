@@ -1,21 +1,24 @@
 package UI;
 
-import Model.Cliente;
-import Model.Concessionaria;
+import Controller.ConexaoBD;
 import Model.ContaEnergia;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class GerarConta extends javax.swing.JFrame {
 
-    private int aux = -1;
-    private ArrayList<ContaEnergia> contas = new ArrayList();
+    ResultSet rsdadosclientes;
+    ResultSet rsdadosconce;
+    ConexaoBD banco = new ConexaoBD();
+    ContaEnergia conta;
 
     public GerarConta() {
         initComponents();
+        primeiroRegistro();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +38,7 @@ public class GerarConta extends javax.swing.JFrame {
         bProximo = new javax.swing.JButton();
         bAnterior = new javax.swing.JButton();
         bLimpar = new javax.swing.JButton();
+        bCalcular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,12 +47,6 @@ public class GerarConta extends javax.swing.JFrame {
         labelKWH.setText("Khw/mês:");
 
         labelValor.setText("Valor da conta:");
-
-        campoCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCpfActionPerformed(evt);
-            }
-        });
 
         bCadastrar.setText("Cadastrar");
         bCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +97,13 @@ public class GerarConta extends javax.swing.JFrame {
             }
         });
 
+        bCalcular.setText("Calcular");
+        bCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCalcularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,16 +115,21 @@ public class GerarConta extends javax.swing.JFrame {
                         .addComponent(bLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelCPF)
-                            .addComponent(labelKWH)
-                            .addComponent(labelValor))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoCpf)
-                            .addComponent(campoKwh)
-                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelCPF)
+                                    .addComponent(labelKWH)
+                                    .addComponent(labelValor))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoCpf)
+                                    .addComponent(campoKwh)
+                                    .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(bCalcular)
+                                .addGap(101, 101, 101)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,54 +169,49 @@ public class GerarConta extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelValor)
-                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(bCalcular)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 466, 358);
     }// </editor-fold>//GEN-END:initComponents
 
-    public Cliente clienteSelecionado() {
-        //seleciona o cliente pelo cpf, para acharmos o estado dele e comparar com a conc e pegar a tarifa
-        ClienteController cc = new ClienteController();
-        File dir = new File("C:\\Users\\Aluno\\Documents\\GitHub\\Desktop\\Arquivos\\Clientes");
-        ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
-        ArrayList<Cliente> clientes = cc.carregaClientes(leitor);
-
-        Cliente cliSelecionado = null;
-        for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCpf().equals(campoCpf.getText())) {
-                cliSelecionado = clientes.get(i);
+    private void primeiroRegistro() {
+        rsdadosclientes = banco.consultaCliente();
+        try {
+            if (rsdadosclientes != null) {
+                if (!rsdadosclientes.isFirst()) {
+                    rsdadosclientes.first();
+                    ExibeRegistroCliente(rsdadosclientes);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Primeiro cliente ja mostrado");
+                }
             }
+        } catch (SQLException erro) {
+            System.out.println(erro);
         }
-        return cliSelecionado;
-    }
-
-    public Concessionaria concessionariaSelecionado() {
-        //estado que tem o estado igual do cliente
-        ConcessionariaController cc = new ConcessionariaController();
-        File dir = new File("C:\\Users\\Aluno\\Documents\\GitHub\\Desktop\\Arquivos\\Concessionarias");
-        ObjectInputStream leitor = cc.CriaLeitorBinario(dir);
-        ArrayList<Concessionaria> concessionarias = cc.carregaConcessionarias(leitor);
-
-        Concessionaria concSelecionado = null;
-        Cliente cliente = clienteSelecionado();
-        for (int i = 0; i < concessionarias.size(); i++) {
-            if (concessionarias.get(i).getEndereco().getEstado().equals(cliente.getEndereco().getEstado())) {
-                concSelecionado = concessionarias.get(i);
-            }
-        }
-        return concSelecionado;
     }
 
     public ContaEnergia pegarCampo() {
-        Concessionaria concSelecionado = concessionariaSelecionado();
+
         ContaEnergia c = new ContaEnergia();
-        c.setCpf(campoCpf.getText());
-        c.setKwh(Float.parseFloat(campoKwh.getText()));
-        c.setValor((concSelecionado.getTarifa()) * (Float.parseFloat(campoKwh.getText())));
+
+        c.setKwh(campoKwh.getText());
+        c.setValor(campoValor.getText());
+        c.setValor(campoValor.getText());
 
         return c;
+    }
+
+    public void ExibeRegistroCliente(ResultSet rs) {
+        try {
+
+            campoCpf.setText(rs.getString("Cli_CPF"));
+        } catch (SQLException erro) {
+            System.out.println(erro);
+        }
     }
 
     public void limparCampos() {
@@ -214,60 +219,18 @@ public class GerarConta extends javax.swing.JFrame {
         campoKwh.setText("");
         campoValor.setText("");
     }
-    private void campoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoCpfActionPerformed
-
     private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
-        //aux++;
-        //cadastrar o cliente no controlador de cliente
-
-        if (diretorio == null) {
-            diretorio = contaController.selecionaArquivo();
-            ObjectOutputStream escritaBinario = contaController.CriaEscritorBinario(diretorio, false);
-
-            ContaEnergia c = pegarCampo();//setar todos os atributos
-            contaController.setArray(c);
-            contaController.EscreveObjeto(escritaBinario, contaController.getArray(), true);
-            limparCampos();
-
-        } else {
-            //diretorio = clienteControle.selecionaArquivo();
-            ObjectOutputStream escritaBinario = contaController.CriaEscritorBinario(diretorio, false);
-            ContaEnergia c = pegarCampo();//setar todos os atributos
-            contaController.setArray(c);
-            contaController.EscreveObjeto(escritaBinario, contaController.getArray(), true);
-            limparCampos();// limpar  todos os campos
-        }
-
-        JOptionPane.showMessageDialog(null, "Conta gerada!");
 
 
     }//GEN-LAST:event_bCadastrarActionPerformed
 
     private void bAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAlterarActionPerformed
 
-        JOptionPane.showMessageDialog(rootPane, "Por favor, altere somente os valores Kw/h");
-        if (diretorio != null) {
-            ObjectOutputStream escritor = contaController.CriaEscritorBinario(diretorio, false);
 
-            ContaEnergia ce = pegarCampo();
-            
-            contas.set(aux, ce);
-
-            contaController.EscreveObjeto(escritor, contas, true);
-        }
-        JOptionPane.showMessageDialog(null, "Dados Alterados!");
-        
     }//GEN-LAST:event_bAlterarActionPerformed
 
     private void bDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeletarActionPerformed
-        ObjectOutputStream escritor = contaController.CriaEscritorBinario(diretorio, false);
 
-        contas.remove(contas.get(aux));
-        contaController.EscreveObjeto(escritor, contas, true);
-        JOptionPane.showMessageDialog(null, "Removido!");
-        limparCampos();
     }//GEN-LAST:event_bDeletarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -278,36 +241,33 @@ public class GerarConta extends javax.swing.JFrame {
 
     private void bProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProximoActionPerformed
 
-        if (diretorio == null) {
-            aux = 0;
-            diretorio = contaController.selecionaArquivo();
-
-            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
-            contas = contaController.carregaContas(leitor);
-
-            campoCpf.setText(contas.get(aux).getCpf());
-            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
-            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
-        } else if (aux < contaController.getArray().size()- 1) {
-            aux++;
-            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
-            contas = contaController.carregaContas(leitor);
-
-            campoCpf.setText(contas.get(aux).getCpf());
-            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
-            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
+        try {
+            if (rsdadosclientes != null) {
+                if (!rsdadosclientes.isLast()) {
+                    rsdadosclientes.next();
+                    ExibeRegistroCliente(rsdadosclientes);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nao existe proximo elemento.");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
         }
+
     }//GEN-LAST:event_bProximoActionPerformed
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
-        if (diretorio != null && aux != 0) {
-            aux--;
-            ObjectInputStream leitor = contaController.CriaLeitorBinario(diretorio);
-            contas = contaController.carregaContas(leitor);
-
-            campoCpf.setText(contas.get(aux).getCpf());
-            campoKwh.setText(String.valueOf(contas.get(aux).getKwh()));
-            campoValor.setText(String.valueOf(contas.get(aux).getValor()));
+        try {
+            if (rsdadosclientes != null) {
+                if (!rsdadosclientes.isFirst()) {
+                    rsdadosclientes.previous();
+                    ExibeRegistroCliente(rsdadosclientes);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nao existe registro anterior.");
+                }
+            }
+        } catch (SQLException erro) {
+            System.out.println(erro);
         }
     }//GEN-LAST:event_bAnteriorActionPerformed
 
@@ -315,6 +275,36 @@ public class GerarConta extends javax.swing.JFrame {
 
         limparCampos();
     }//GEN-LAST:event_bLimparActionPerformed
+
+    private void bCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcularActionPerformed
+        // TODO add your handling code here:
+        rsdadosclientes = banco.consultaCliente();
+        if (rsdadosclientes != null) {
+            try {
+                if (!rsdadosclientes.isFirst()) {
+                    rsdadosclientes.first();
+                    ExibeRegistroCliente(rsdadosclientes);
+                    
+                    try {
+                        rsdadosconce = banco.pegaTarifa(rsdadosclientes.getString("Cli_CPF"));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    int kwh = Integer.parseInt(campoKwh.getText());
+                    try {
+                        int tarifa = rsdadosconce.findColumn("Conc_Tarifa");
+                        int total = kwh * tarifa;
+                        campoValor.setText(String.valueOf(total));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GerarConta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_bCalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,6 +345,7 @@ public class GerarConta extends javax.swing.JFrame {
     private javax.swing.JButton bAlterar;
     private javax.swing.JButton bAnterior;
     private javax.swing.JButton bCadastrar;
+    private javax.swing.JButton bCalcular;
     private javax.swing.JButton bDeletar;
     private javax.swing.JButton bLimpar;
     private javax.swing.JButton bProximo;
