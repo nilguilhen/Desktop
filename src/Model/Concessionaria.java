@@ -1,10 +1,9 @@
 package Model;
+
 import java.io.Serializable;
 
 public class Concessionaria implements Serializable {
 
-    
-    
     private String nome;
     private String cnpj;
     private String tarifa;
@@ -88,7 +87,7 @@ public class Concessionaria implements Serializable {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    private String pais;  
+    private String pais;
     private String estado;
     private String cidade;
     private String rua;

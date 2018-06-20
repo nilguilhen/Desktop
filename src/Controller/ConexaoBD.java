@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Model.Cliente;
 import Model.Concessionaria;
+import model.Conta;
 
 /**
  *
@@ -39,7 +40,7 @@ public class ConexaoBD {
 
         try {
             String usuario = "postgres";
-            String senha = "48691848";
+            String senha = "utfpr";
 
             Class.forName("org.postgresql.Driver");
             String urlconexao = "jdbc:postgresql://127.0.0.1/Desktop";
@@ -267,6 +268,28 @@ public class ConexaoBD {
             }
         }
         return null;
+    }
+    
+        public void cadastroConta(Conta conta) {
+
+        if (conectaBD()) {
+            try {
+                String SQL = "INSERT INTO Contas (Conta_CPF,Conta_Khw,Conta_Valor) VALUES (?,?,?)";
+
+                pstmt = conn.prepareStatement(SQL, tipo, concorrencia);
+
+                pstmt.setString(1, conta.getCPF());
+                pstmt.setString(2, conta.getKwh());
+                pstmt.setString(3, conta.getValor());
+
+                pstmt.executeUpdate();
+                conn.commit();
+
+                conn.close();
+            } catch (SQLException Erro) {
+                System.out.println("Erro" + Erro);
+            }
+        }
     }
 
 }
