@@ -443,6 +443,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     private void bGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarActionPerformed
        
+        this.setVisible(false);
         new GeraConta().setVisible(true);
         
     }//GEN-LAST:event_bGerarActionPerformed

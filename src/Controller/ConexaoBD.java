@@ -40,7 +40,7 @@ public class ConexaoBD {
 
         try {
             String usuario = "postgres";
-            String senha = "utfpr";
+            String senha = "48691848";
 
             Class.forName("org.postgresql.Driver");
             String urlconexao = "jdbc:postgresql://127.0.0.1/Desktop";
@@ -254,7 +254,7 @@ public class ConexaoBD {
     public ResultSet pegaTarifa(String CPF) {
         if (conectaBD()) {
             try {
-                String SQL = "SELECT Conc_Tarifa FROM Concessionaria co, Cliente cl WHERE co.Conc_Estado = cl.Cli_Estado and cl.Cli_CPF = ?";
+                String SQL = "SELECT Conc_Tarifa FROM Concessionaria co, Cliente cl WHERE cl.Cli_CPF = (?) and co.Conc_Estado = cl.Cli_Estado";
 
                 stmt = conn.createStatement(tipo, concorrencia);
                 pstmt.setString(1, CPF);
