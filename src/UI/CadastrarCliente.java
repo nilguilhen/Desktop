@@ -17,7 +17,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     public CadastrarCliente() {
         initComponents();
         primeiroRegistro();
-
     }
 
     /**
@@ -58,7 +57,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         labelNumero = new javax.swing.JLabel();
         labelCPF = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        bGerar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,13 +150,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
             }
         });
 
-        bGerar.setText("GerarConta");
-        bGerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bGerarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,14 +200,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(campoIdade)
                         .addGap(117, 117, 117))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(labelTittle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(bGerar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(128, 128, 128)
+                .addComponent(labelTittle)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +256,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelIdade)
                     .addComponent(campoIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(bGerar)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -441,13 +425,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         primeiroRegistro();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void bGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGerarActionPerformed
-       
-        this.setVisible(false);
-        new GeraConta().setVisible(true);
-        
-    }//GEN-LAST:event_bGerarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -489,7 +466,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton bAnterior;
     private javax.swing.JButton bCadastrar;
     private javax.swing.JButton bDeletar;
-    private javax.swing.JButton bGerar;
     private javax.swing.JButton bHome;
     private javax.swing.JButton bLimpar;
     private javax.swing.JButton bProximo;

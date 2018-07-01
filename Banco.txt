@@ -24,6 +24,12 @@ CREATE TABLE Concessionaria(
     Conc_Complemento VARCHAR(100),
     Conc_CEP VARCHAR(10),
 	CONSTRAINT Pk_Conc_CNPJ PRIMARY KEY (Conc_CNPJ));
+
+CREATE TABLE Contas(
+	Conta_CPF VARCHAR(11),
+    Conta_Khw VARCHAR(20),
+    Conta_Valor VARCHAR(20),
+    CONSTRAINT PK_Conta_CPF PRIMARY KEY (Conta_CPF));
     
 
  /*   

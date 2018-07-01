@@ -35,17 +35,12 @@ public class ConexaoBD {
 
     int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
     int concorrencia = ResultSet.CONCUR_UPDATABLE;
-
+    
     public boolean conectaBD() {
 
         try {
-            String usuario = "postgres";
-            String senha = "48691848";
-
-            Class.forName("org.postgresql.Driver");
-            String urlconexao = "jdbc:postgresql://127.0.0.1/Desktop";
-
-            conn = DriverManager.getConnection(urlconexao, usuario, senha);
+            
+            conn = getConexao();
             conn.setAutoCommit(false);
 
             DatabaseMetaData dbmt = conn.getMetaData();
@@ -56,7 +51,8 @@ public class ConexaoBD {
             System.out.println("Driver: " + dbmt.getDriverName());
             System.out.println("Versao Driver: " + dbmt.getDriverVersion());
             System.out.println("Usuario: " + dbmt.getUserName());
-
+            
+            return true;
         } catch (ClassNotFoundException Erro) {
             System.out.println("Erro ao tentar carregar o driver JDBC/ODBC." + Erro);
             return false;
@@ -65,9 +61,19 @@ public class ConexaoBD {
             System.out.println("Falha na conexao" + Erro);
             return false;
         }
-        return true;
     }
+    
+    public Connection getConexao() throws ClassNotFoundException, SQLException{
+        String usuario = "postgres";
+        //String senha = "48691848";
+        String senha = "";
 
+        Class.forName("org.postgresql.Driver");
+        String urlconexao = "jdbc:postgresql://localhost:5432/Desktop";
+        //String urlconexao = "jdbc:postgresql://127.0.0.1/Desktop";
+        return DriverManager.getConnection(urlconexao, usuario, senha);
+    }
+    
     public void cadastroCliente(Cliente cliente) {
 
         if (conectaBD()) {
