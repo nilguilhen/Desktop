@@ -1,10 +1,5 @@
 package UI;
 
-/**
- *
- * @author Aluno
- */
-
 import Controller.ConexaoBD;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -136,6 +131,8 @@ public class Principal extends javax.swing.JFrame {
                 } catch (JRException ex) {
                     System.err.println("Não foi possível exportar o relatório.\n\n");
                     ex.printStackTrace();
+                } catch (Exception ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
                     try {
                         conn.close();
